@@ -1,0 +1,13 @@
+subscriber_type,duration_min_range,count
+Subscriber,4,623
+Subscriber,3,2038
+Subscriber,5,2663
+Customer,4,4425
+Customer,3,8176
+Subscriber,2,15688
+Customer,2,22574
+Customer,0,28588
+Customer,5,29412
+Customer,1,43634
+Subscriber,1,258612
+Subscriber,0,567215
