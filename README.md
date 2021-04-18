@@ -1,5 +1,8 @@
-"# w241_final" 
-The Effect of Reward Systems on Gameplay
+# The Effect of Reward Systems on Gameplay
+
+W241 Final
+
+### Group Members
 
 Frank Bruni
 UC Berkeley MIDS
