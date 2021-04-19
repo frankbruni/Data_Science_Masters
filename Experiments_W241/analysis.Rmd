@@ -1,0 +1,103 @@
+---
+title: "game_rewards_analysis2"
+authors: Frank Bruni, Ash Tan, Casey Yoon
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+library(stargazer)
+library(data.table)
+```
+
+```{r, echo=FALSE}
+d <- read.csv('game_data.csv')
+```
+
+```{r}
+# Normalize clicks
+d$clicks_normalize = d$clicks - d$font
+```
+
+```{r}
+# log duration + log clicks
+d$log_duration = log(d$duration+1)
+d$log_clicks = log(d$clicks_normalize + 1)
+```
+
+
+```{r}
+# Combines html 2 and 3 into one group
+
+d[d$html == 3, ]$html = 2
+```
+
+
+```{r, echo=FALSE}
+# Convert variable html from numeric to factor variable
+d$html <- as.factor(d$html)
+```
+
+
+
+```{r}
+# Violin plot of distribution of clicks by treatment group
+p <- ggplot(d, aes(x=html, y=clicks_normalize)) + 
+  geom_violin(trim=FALSE) +
+  geom_boxplot(width=0.1) +
+  coord_flip() + 
+  labs(title="Plot of clicks by treatment group", x="html treatment", y="clicks")
+p
+```
+
+```{r}
+d$engagement =  0.05 * d$log_duration + 0.95 * d$log_clicks
+```
+
+```{r}
+res.aov <- aov(log_clicks~ html, data = d)
+summary(res.aov)
+
+```
+
+```{r}
+plot(res.aov,)
+```
+
+```{r}
+# Randomization Inference
+log_clicks_group_mean <- data.table(d)[, .(mean_log_clicks = mean(log_clicks)), keyby='html']
+
+log_clicks_ate <- log_clicks_group_mean[, diff(mean_log_clicks)]
+```
+
+```{r}
+n <- nrow(d)
+
+random_ate <- function() {
+  random_group_mean <- data.table(d)[, random_treatment:= sample(c(0,1), replace=TRUE, size=n)]
+  random_group_mean <- random_group_mean[, .(mean_log_clicks = mean(log_clicks)), keyby='random_treatment']
+  ate <- random_group_mean[, diff(mean_log_clicks)]
+  return(ate)
+}
+
+randomization_inference <- function(num_simulations) {
+  distribution <- NA
+  for (i in 1:num_simulations) {
+    distribution[i] <- random_ate()
+  }
+  return(distribution)
+}
+```
+
+```{r}
+log_clicks_distribution <- randomization_inference(10000)
+```
+```{r}
+p_value <- mean(abs(log_clicks_distribution) > abs(log_clicks_ate))
+c(p_value)
+```
