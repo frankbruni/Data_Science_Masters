@@ -1,1 +1,1 @@
-# Data Science Masters at **UC Berkeley** .
+# Data Science Masters at UC Berkeley
