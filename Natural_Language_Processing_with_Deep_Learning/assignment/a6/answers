@@ -1,0 +1,240 @@
+# Write your short answers in this file, replacing the placeholders as appropriate.
+# This assignment consists of 5 parts for a total of 52 points.
+# For numerical answers, copy and paste at least 5 significant figures.
+# - Project Data (4 points)
+# - Window and Recurrent Models (12 points)
+# - ELMO embeddings (6 points)
+# - Machine Translation Introduction (8 points)
+# - Machine Translation (22 points)
+
+
+
+###################################################################
+###################################################################
+## Project Data (4 points)
+###################################################################
+###################################################################
+
+
+# ------------------------------------------------------------------
+# | Section (1): Project Progress (unrelated to a notebook) (4 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/1): In one sentence, describe what your model is learning.
+project_data_1_1: We are fine tuning our model on news data to create a summarizer.
+
+# Question 2 (/1): Who created your training data?
+project_data_1_2: Our training data comes from hugging face.
+
+# Question 3 (/1): How many training records do you have?
+project_data_1_3: 300000
+
+# Question 4 (/1): How many test records do you have?
+project_data_1_4: 10000
+
+
+
+###################################################################
+###################################################################
+## Window and Recurrent Models (12 points)
+###################################################################
+###################################################################
+
+
+# ------------------------------------------------------------------
+# | Section (a): Neural network topology understanding (12 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/2): What is the main benefit to a window model over a RNN?
+# (This question is multiple choice.  Delete all but the correct answer).
+window_and_recurrent_models_a_1: 
+ - Fast to train and use
+
+# Question 2 (/2): In the RNN/LSTM slides (https://docs.google.com/presentation/d/1-27SRkBCsv8vlKp7irdLYNhoGZDunHdDq12ytKS_ix0/edit#slide=id.g5b125d627b_10_22), when two wires merge in the diagrams, what does that mean?
+# (This question is multiple choice.  Delete all but the correct answer).
+window_and_recurrent_models_a_2: 
+ - concatenation
+
+# Question 3 (/2): What are dangers of training RNNs (of any type) with long sequences? (There is more than one right answer so leave all the correct ones.)
+# (This question is multiple choice.  Delete all but the correct answer).
+window_and_recurrent_models_a_3: 
+ - Exploding gradient
+ - Vanishing gradient
+
+# Question 4 (/2): What is a drawback to building an architecture with an RNN or LSTM?
+# (This question is multiple choice.  Delete all but the correct answer).
+window_and_recurrent_models_a_4: 
+ - Design limits GPU acceleration due to sequential dependencies
+
+# Question 5 (/2): What is the purpose of the forget gate in an LSTM?
+# (This question is multiple choice.  Delete all but the correct answer).
+window_and_recurrent_models_a_5: 
+ - outputs a number between 0 and 1 for each number in the hidden state causing it to forget
+
+# Question 6 (/2): A key difference between an LSTM and a GRU is...?
+# (This question is multiple choice.  Delete all but the correct answer).
+window_and_recurrent_models_a_6: 
+ - The GRU combines the forget and input gates into a single "update gate"
+
+
+
+###################################################################
+###################################################################
+## ELMO embeddings (6 points)
+###################################################################
+###################################################################
+
+
+# ------------------------------------------------------------------
+# | Section (a): Introduction (6 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/2): How does ELMO produce contextualized embeddings?
+# (This question is multiple choice.  Delete all but the correct answer).
+elmo_embeddings_a_1: 
+ - ELMO reads the entire sentence and uses all the words to help contextualize each word.
+
+# Question 2 (/2): The ELMO API provides access to which of the following? (There is more than one right answer so leave all the correct ones.)
+# (This question is multiple choice.  Delete all but the correct answer).
+elmo_embeddings_a_2: 
+ - Level one LSTM hidden states
+ - Level two LSTM hidden states
+ - ELMO embeddings
+
+# Question 3 (/2): ELMO is pre-trained on... ?
+# (This question is multiple choice.  Delete all but the correct answer).
+elmo_embeddings_a_3: 
+ - The billion word benchmark and a forward and backward language model.
+
+
+
+###################################################################
+###################################################################
+## Machine Translation Introduction (8 points)
+###################################################################
+###################################################################
+
+
+# ------------------------------------------------------------------
+# | Section (a): Introduction (8 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/3): What is BLEU?
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_introduction_a_1: 
+ - A metric for machine translation centered on a notion of precision of a candidate with respect to reference text.
+
+# Question 2 (/3): What are the key parts of IBM Model 1? (There is more than one right answer so leave all the correct ones.)
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_introduction_a_2: 
+ - Term level translation model
+ - Alignment model
+
+# Question 3 (/2): What is BLEURT?
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_introduction_a_3: 
+ - A model that is trained to predict human judgement scores based on WMT annotated data.
+
+
+
+###################################################################
+###################################################################
+## Machine Translation (22 points)
+###################################################################
+###################################################################
+
+
+# ------------------------------------------------------------------
+# | Section (a): Evaluation (5 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/1): Why is an automated evaluation important for machine translation? (There is more than one right answer so leave all the correct ones.)
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_a_1: 
+ - Cost
+ - Speed
+ - Consistency
+
+# Question 2 (/1): What is the fundamental difficulty constructing a metric for machine translation?
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_a_2: 
+ - No computable proxy for human judgement has been found.
+
+# Question 3 (/1): In BLEU, the max credit idea is required to prevent what?
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_a_3: 
+ - Giving high scores to degenerate translations that blindly list common words.
+
+# Question 4 (/1): How does BLEU score prevent a candidate with only [the] being scored highly?
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_a_4: 
+ - Max Credit
+
+# Question 5 (/1): Why is it still important to run human evaluations?  (There is more than one right answer so leave all the correct ones :)
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_a_5: 
+ - Correlation with human judgement is reduced when comparing candidates generated by different styles of MT systems (rules, PBMT, neural)
+ - Correlation may not be as strong in the high end.  One can over optimize on the BLEU score, possibly in a way that reduces its effectiveness as a proxy for human judgement
+
+
+# ------------------------------------------------------------------
+# | Section (b): Sequence to Sequence Learning Paper (3 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/1): In Sequence to Sequence Learning with Neural Networks 2014, how much additional BLEU score did they achieve by reversing the input sentence?
+machine_translation_b_1: 4.7
+
+# Question 2 (/1): The authors of the paper believe reversing input to the encoder helps to...
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_b_2: 
+ - reduce an otherwise large minimal time lag
+
+# Question 3 (/1): What issues are there with the seq2seq model in the paper? (There is more than one right answer so leave all the correct ones.)
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_b_3: 
+ - Quality decreases with sentence length, likely due to the long distance connections and the need for the encoder to compress an arbitrary amount of input into a fixed width vector
+ - RNNs do not parallelize very well, making them slow to train
+
+
+# ------------------------------------------------------------------
+# | Section (c): Encoder Decoder Models (1 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/1): An encoder decoder model...
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_c_1: 
+ - encodes individual words into translated embeddings that are contextualized for later use when decoded
+
+
+# ------------------------------------------------------------------
+# | Section (d): Attention (11 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/1): In the most basic attention models, ... (There is more than one right answer so leave all the correct ones.)
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_d_1: 
+ - a query vector is sent back from the decoder to the encoder
+ - the softmax calculation in the attention mechanism has a fixed number of inputs
+ - the encoder state closest to the query vector is returned to the decoder
+
+# Question 2 (/5): If the decoder query is [3, 5, 8] and the encoder states are [3, 2, -8], [1, -2, 5], [3, 6, 9], what is the softmax input?
+machine_translation_d_2: [-45, 33, 111]
+
+# Question 3 (/5): Assume, though it is not, the previous answer was [0, 1, -1] but changing nothing else, what is the vector provided to the decoder?
+machine_translation_d_3: [.245, .665, .090]
+
+
+# ------------------------------------------------------------------
+# | Section (e): Beam Search (2 points)  | 
+# ------------------------------------------------------------------
+
+# Question 1 (/1): As the width of beam search, changes...  (There is more than one right answer so leave all the correct ones :)
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_e_1: 
+ - ... if the width goes to 1, beam search degenerates into greedy search
+ - ... if the width goes to inf, beam search degenerates into exhaustive search
+
+# Question 2 (/1): According to the Sequence to Sequence Learning with Neural Networks paper in part b, a beam size of how large provides most of the benefits?
+# (This question is multiple choice.  Delete all but the correct answer).
+machine_translation_e_2: 
+ - 2

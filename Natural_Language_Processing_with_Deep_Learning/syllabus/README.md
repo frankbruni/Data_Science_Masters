@@ -33,16 +33,16 @@ Understanding language is fundamental to human interaction. Our brains have evol
 
 **Teaching Staff Office Hours:**
 
-* **Zack Alexander**: TDB
-* **Mark Butler**: Thursday and Friday immediately after his live session
-* **Daniel Cer**: Thursday at 4pm PST
-* **Peter Grabowski**: TBD
+* **Zack Alexander**: Thursday immediately after his live session
+* **Mark Butler**: Monday at 1pm PST and Friday immediately after his live session
+* **Daniel Cer**: Friday at noon PST
+* **Peter Grabowski**: Tuesday immediately after his live sessions
 * **Joachim Rahmfeld**: Wednesday immediately after his live session
 * **Sid J Reddy**: Saturday immediately after his live session
 * **Mike Tamir/Paul Spiegelhalter**: Wednesday immediately after his live session
 * **Drew Plant**: Monday at 6pm PST
 * **Gurdit Chahal**: Tuesday at 5pm PST
-* **Anu Yadav**: TBD
+* **Anu Yadav**: Thursday at 6pm PST
 
 Office hours are for the whole class; students from any section are welcome to attend any of the times above.
 
@@ -168,18 +168,39 @@ will be released around the last live session of the week and due approximately 
     <li>Google Cloud
   </ul></td>
   <td></td>
-  <td>TBD</td>
+  <td>Jan&nbsp10</td>
 </tr>
 
-<!-- draft project proposal -->
-<!-- <tr> 
-  <td><strong><a href="../project/#draft-project-proposal" target="_blank">Project&nbsp;Proposal Draft</a></strong>
-  <td>
-  <strong><a href="../project" target="_blank">Draft Project Guidelines</a></strong>
-  </td>
+<tr> <!-- a1 -->
+  <td><strong><a href="../assignment/a1" target="_blank">Assignment&nbsp;1</a></strong>
+  <td><strong>Assignment 1</strong>
+  <ul>
+    <li>Information Theory
+  </ul></td>
   <td></td>
-  <td>Sep&nbsp;12</td>
-</tr> -->
+  <td>Jan&nbsp;17</td>
+</tr>
+
+<tr>  <!-- a2 -->
+  <td><strong><a href="../assignment/a2" target="_blank">Assignment&nbsp;2</a></strong>
+  <td><strong>Assignment 2</strong>
+  <ul>
+    <li>Neural Networks
+  </ul></td>
+  <td></td>
+  <td>Jan&nbsp;24</td>
+</tr>
+
+<tr> <!-- a3 -->
+  <td><strong><a href="../assignment/a3" target="_blank">Assignment&nbsp;3</a></strong>
+  <td><strong>Assignment 3</strong>
+  <ul>
+    <li>Embeddings
+    <li>ML Fairness
+  </ul></td>
+  <td></td>
+  <td>Jan&nbsp;31</td>
+</tr>
 
 <tr> <!-- project proposal -->
   <td><strong><a href="../project/#project-proposal" target="_blank">Project&nbsp;Proposal</a></strong>
@@ -189,6 +210,48 @@ will be released around the last live session of the week and due approximately 
   <td></td>
   <td>Feb&nbsp;6</td>
 </tr>
+
+<tr> <!-- a4 -->
+  <td><strong><a href="../assignment/a4" target="_blank">Assignment&nbsp;4</a></strong>
+  <td><strong>Assignment 4</strong>
+  <ul>
+    <li>Classification
+    <li>Convolutional Neural Nets
+  </ul></td>
+  <td></td>
+  <td>Feb&nbsp;14</td>
+</tr>
+
+<tr> <!-- a5 -->
+  <td><strong><a href="../assignment/a5" target="_blank">Assignment&nbsp;5</a></strong>
+  <td><strong>Assignment 5</strong>
+  <ul>
+    <li>Language Models
+  </ul></td>
+  <td></td>
+  <td>Feb&nbsp;21</td>
+</tr>
+
+<tr> <!-- a6 -->
+  <td><strong><a href="../assignment/a6" target="_blank">Assignment&nbsp;6</a></strong>
+  <td><strong>Assignment 6</strong>
+  <ul>
+    <li>Machine Translation
+  </ul></td>
+  <td></td>
+  <td>Mar&nbsp;7</td>
+</tr>
+
+<tr> <!-- a7 -->
+  <td><strong><a href="../assignment/a7" target="_blank">Assignment&nbsp;7</a></strong>
+  <td><strong>Assignment 7</strong>
+  <ul>
+    <li>Various Topics
+  </ul></td>
+  <td></td>
+  <td>Mar&nbsp;14</td>
+</tr>
+
 <tr><!--- Project Reports -->
   <td><strong><a href="../project/#final-submission" target="_blank">Project&nbsp;Reports</a></strong>
   </td>
@@ -243,7 +306,7 @@ will be released around the last live session of the week and due approximately 
   <td>
   <br>5.2 Softmax Classification
   <br>5.4 Neural network recap
-  <br>5.5 Neural network training loss
+  <br>5.6 Neural network training loss
   </td>
   <td><ul>
     <li>ML models: Logistic regression and feed forward networks
@@ -297,9 +360,9 @@ will be released around the last live session of the week and due approximately 
   <li>Read: <a href="https://arxiv.org/pdf/1104.2086.pdf" target="_blank">A Universal Part-of-Speech Tagset</a>
   <li><em>Optional:</em> <a href="http://nlp.stanford.edu/pubs/CICLing2011-manning-tagging.pdf" target="_blank">Part-of-Speech Tagging from 97% to 100%: Is It Time for Some Linguistics?</a>
     <li>Read: <a href="https://research.googleblog.com/2016/05/announcing-syntaxnet-worlds-most.html" target="_blank">SyntaxNet (Parsey McParseface)</a>
-  <li>Skim: <a href="https://web.stanford.edu/~jurafsky/slp3/15.pdf" target="_blank">Dependency Parsing (J&M Chapter 15)</a>
+  <li>Skim: <a href="https://web.stanford.edu/~jurafsky/slp3/14.pdf" target="_blank">Dependency Parsing (J&M Chapter 14)</a>
     <li>Skim: <a href="https://web.stanford.edu/~jurafsky/slp3/13.pdf" target="_blank">Constituency Parsing (J&M Chapter 13)</a>
-  <li><em>Optional:</em> <a href="http://cs.stanford.edu/people/danqi/papers/emnlp2014.pdf" target="_blank">A Fast and Accurate Dependency Parser using Neural Networks</a> (Chen & Manning 2014)
+  <li><em>Optional:</em> <a href="https://www.aclweb.org/anthology/D14-1082.pdf" target="_blank">A Fast and Accurate Dependency Parser using Neural Networks</a> (Chen & Manning 2014)
     <li>Skim: <a href="http://www.nltk.org/book/ch08.html" target="_blank">NLTK book chapter 8 (analyzing sentence structure)</a>
   <li>Skim: <a href="http://ilpubs.stanford.edu:8091/~klein/unlexicalized-parsing.pdf" target="_blank">Accurate Unlexicalized Parsing</a> (Klein & Manning 2003)
   <li>Play: <a href="http://nlp.stanford.edu:8080/parser/" target="_blank">Stanford parser</a> (online demo)
