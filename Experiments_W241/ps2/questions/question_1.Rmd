@@ -1,0 +1,80 @@
+# 1. What happens when pilgrims attend the Hajj pilgrimage to Mecca? 
+
+What happens when a diverse set of people are brought together toward a common purpose? Maybe it brings people together, or maybe instead it highlights the differences between groups.  [Clingingsmith, Khwaja and Kremer (2009)](https://dash.harvard.edu/handle/1/3659699) investigate the question. by asking Pakistani nationals to provide information about their views about people from other nations. 
+
+The random assignment and data is collected in the following way (detailed in the paper): 
+
+- Pakistani nationals apply for a chance to attend the Hajj at a domestic bank. Saudi Arabia agreed in the time period of the study (2006) to grant 150,000 visas. 
+- Of the 135,000 people who applied for a visa, 59% of those who applied were successful. 
+- The remainder of the visas were granted under a different allocation method that was not randomly assigned, and so this experiment cannot provide causal evidence about other allocation mechanisms. 
+- Among the 135,000 who apply, the authors conduct a random sample and survey about these respondents views about others. 
+
+Using the data collected by the authors, test, using randomization infernece, whether there is a change in beliefs about others as a result of attending the Hajj. 
+
+- Use, as your primary outcome the `views` variable. This variable is a column-sum of each respondent's views toward members of other countries. 
+- Use, as your treatment feature `success`. This variable encodes whether the respondent successfully attended the Hajj. 
+
+```{r load hajj data }
+d <- fread("../data/clingingsmith_2009.csv")
+```
+
+1. State the sharp-null hypothesis that you will be testing. 
+
+> The sharp null hypothesis is one such that for each subject there is no change in the views variable whether the subject went to the Hajj or not. There is zero treatment effect. 
+
+2. Using `data.table`, group the data by `success` and report whether views toward others are generally more positive among lottery winners or lottery non-winners. This answer should be of the form `d[ , .(mean_views = ...), keyby = ...]` where you have filled in the `...` with the appropriate functions and varaibles. 
+
+```{r actual hajj ate}
+hajj_group_mean <- d[ , .(mean_views = mean(views)), keyby = success] # the result should be a data.table with two colums and two rows
+
+hajj_ate <- hajj_group_mean[success==1,mean_views]- hajj_group_mean[success==0,mean_views] # from the `hajj_group_mean` produce a single, numeric vector that is the ate. check that it is numeric using `class(hajj_ate)`
+hajj_ate 
+```
+
+But is this a "meaningful" difference? Or, could a difference of this size have arisen from an "unlucky" randomization? Conduct 10,000 simulated random assignments under the sharp null hypothesis to find out. (Don't just copy the code from the async, think about how to write this yourself.) 
+
+```{r hajj randomization inference}
+## do your work to conduct the randomiation inference here.
+## as a reminder, RI will randomly permute / assign the treatment variable
+## and recompute the test-statistic (i.e. the mean difference) under each permutation
+ri <- function(simulations = 10000) {
+  
+  res <- NA   
+  
+  for(sim in 1:simulations) { 
+    d[,success:=sample(c(0,1),replace=TRUE,size=958)]
+    x =  d[ , .(mean_views = mean(views)), keyby = success]
+    res[sim] <-x[success==1,mean_views]- x[success==0,mean_views]
+  }
+  return(res)
+}
+hajj_ri_distribution <- ri() # this should be a numeric vector that has a length equal to the number of RI permutations you ran
+```
+
+
+3. How many of the simulated random assignments generate an estimated ATE that is at least as large as the actual estimate of the ATE? Conduct your work in the code chunk below, saving the results into `hajj_count_larger`, but also support your coding with a narrative description. In that narrative description (and throughout), use R's "inline code chunks" to write your answer consistent with each time your run your code.  
+
+```{r hajj one-tailed count}
+hajj_count_larger <- sum(hajj_ri_distribution >= hajj_ate)# length 1 numeric vector from comparison of `hajj_ate` and `hajj_ri_distribution`
+
+hajj_count_larger
+```
+
+**We are counting the number of times our ate in our simulation is as big or bigger than the ate we found originally. This assumes the sharp null so if there are very few occurances of this we will be able to conclude the sharp null faulty.**
+
+4. If there are `hajj_count_larger` randomizations that are larger than `hajj_ate`, what is the implied *one-tailed* p-value? Both write the code in the following chunk, and include a narrative description of the result following your code.
+
+```{r hajj one-tailed p-value}
+hajj_one_tailed_p_value <- hajj_count_larger/10000 # length 1 numeric vector 
+hajj_one_tailed_p_value
+```
+**This is the one tailed test. A small p value means the sharp null hypothesis can be rejected.**
+5. Now, conduct a similar test, but for a two-sided p-value. You can either use two tests, one for larger than and another for smaller than; or, you can use an absolute value (`abs`). Both write the code in the following chunk, and include a narrative description of the result following your code. 
+
+```{r hajj two-tailed p-value}
+hajj_two_tailed_p_value <- sum(abs(hajj_ri_distribution) >= hajj_ate)/10000 # length 1 numeric vector 
+hajj_two_tailed_p_value
+```
+
+**This is the same as above except we are calculating the two tailed test which means we are taking the absolute value of our ate's from the simulation.**
+

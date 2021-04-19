@@ -1,0 +1,5 @@
+# 3. Optional: Think about Treatment Effects 
+
+Throughout this course we have focused on the average treatment effect. *Why* we are concerned about the average treatment effect. What is the relationship between an ATE, and some individuals' potential outcomes? Make the strongest case you can for why this is a *good* measure.
+
+> We set up our experiments to find an average treatment effect so we can apply the knowledge gained to the general public. This is why randomization is crucial in the process. The average treatment effect tells you on average how a treatment will effect a subject. A person always has multiple potential outcomes and the average treatment effect attempts to tell you the difference between these for any given subject.

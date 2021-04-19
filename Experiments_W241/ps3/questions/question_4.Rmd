@@ -1,0 +1,94 @@
+# 4. Now! Do it with data 
+Download the data set for the recycling study in the previous problem, obtained from the authors. We'll be focusing on the outcome variable Y="number of bins turned in per week" (avg_bins_treat).
+
+```{r}
+d <- foreign::read.dta("../data/karlan_data_subset_for_class.dta")
+d <- data.table(d)
+
+d[,street_fixed:=ifelse(street<0,0,1)]
+head(d)
+## Do some quick exploratory data analysis with this data. 
+## There are some values in this data that seem a bit strange. 
+
+## Determine what these are. 
+## Don't make an assessment about keeping, changing, or 
+## dropping just yet, but at any point that your analysis touches 
+## these variables, you'll have to determine what is appropriate 
+## given the analysis you are conducting. 
+```
+
+1. For simplicity, let's start by measuring the effect of providing a recycling bin, ignoring the SMS message treatment (and ignoring whether there was a sticker on the bin or not).  Run a regression of Y on only the bin treatment dummy, so you estimate a simple difference in means.  Provide a 95% confidence interval for the treatment effect, using **of course** robust standard errors (use these throughout). 
+
+```{r estimate basic model}
+mod_1 <- lm(avg_bins_treat~bin,data=d)
+coefci(x=mod_1,level=0.95,vcov=vcovHC(mod_1,type='HC1'))
+```
+
+> 95% interval of [0.09457479 0.1761852]
+
+2. Now add the pre-treatment value of Y as a covariate.  Provide a 95% confidence interval for the treatment effect.  Explain how and why this confidence interval differs from the previous one.
+
+```{r add pre-treatment values}
+mod_2 <- lm(avg_bins_treat~bin+base_avg_bins_treat,data=d)
+coefci(x=mod_2,level=0.95,vcov=vcovHC(mod_2,type='HC1'))
+```
+
+>tighter confidence interval becasue we are addcing a covariate which reduces our standard erros
+
+3. Now add the street fixed effects.  (You'll need to use the R command factor().) Provide a 95% confidence interval for the treatment effect.  
+
+```{r add fixed effects}
+mod_3 <-  lm(avg_bins_treat~bin+base_avg_bins_treat+factor(street_fixed),data=d)
+coefci(x=mod_3,level=0.95,vcov=vcovHC(mod_3,type='HC1'))
+```
+
+> 95% interval of [0.09067771 0.15788046]
+
+4. Recall that the authors described their experiment as "stratified at the street level," which is a synonym for blocking by street.  Does including these block fixed effects change the standard errors of the estimates *very much*? Conduct the appropriate test for the inclusion of these block fixed effects, and interpret them in the context of the other variables in the regression. 
+
+```{r fixed effects model} 
+mod_4 <- lm(avg_bins_treat~bin+base_avg_bins_treat + as.factor(street_fixed),data=d)
+coefci(x=mod_4,level=0.95,vcov=vcovHC(mod_4,type='HC1'))
+```
+
+```{r test for fixed effects}
+test_fixed_effects <- anova(mod_4)
+test_fixed_effects 
+```
+
+
+>
+
+5. Perhaps having a cell phone helps explain the level of recycling behavior. Instead of "has cell phone," we find it easier to interpret the coefficient if we define the variable " no cell phone."  Give the R command to define this new variable, which equals one minus the "has cell phone" variable in the authors' data set.  Use "no cell phone" instead of "has cell phone" in subsequent regressions with this dataset.
+
+```{r feature engineering mid-analysis (dont do this IRL!)}
+d[,no_cell_phone:=(1-havecell)]
+d
+```
+
+6. Now add "no cell phone" as a covariate to the previous regression.  Provide a 95% confidence interval for the treatment effect.  Explain why this confidence interval does not differ much from the previous one.
+
+```{r add cell-phone variable}
+mod_5 <- lm(avg_bins_treat~bin+base_avg_bins_treat + as.factor(street_fixed)+no_cell_phone,data=d)
+coefci(x=mod_5,level=0.95,vcov=vcovHC(mod_5,type='HC1'))
+```
+
+> 95% interval of [0.09161935  0.15875685]
+
+7. Now let's add in the SMS treatment.  Re-run the previous regression with "any SMS" included.  You should get the same results as in Table 4A.  Provide a 95% confidence interval for the treatment effect of the recycling bin.  Explain why this confidence interval does not differ much from the previous one.
+
+```{r add sms treatment}
+
+mod_6 <- lm(avg_bins_treat~bin+base_avg_bins_treat + as.factor(street_fixed)+no_cell_phone+sms,data=d)
+coefci(x=mod_6,level=0.95,vcov=vcovHC(mod_6,type='HC1'))
+```
+
+8. Now reproduce the results of column 2 in Table 4B, estimating separate treatment effects for the two types of SMS treatments and the two types of recycling-bin treatments.  Provide a 95% confidence interval for the effect of the unadorned recycling bin.  Explain how your answer differs from that in part (g), and explain why you think it differs.
+
+```{r full model}
+
+mod_7 <- lm(avg_bins_treat~base_avg_bins_treat + as.factor(street_fixed)+no_cell_phone+bin_s+bin_g+sms_p+sms_g,data=d)
+coefci(x=mod_7,level=0.95,vcov=vcovHC(mod_7,type='HC1'))
+```
+> 95% interval of [0.06548347  0.155817410]
+> The control before was not receiving a bin while now it is receiving a bin without a sticker. This question shows us the treatment effect of receving a bin with sticker.

@@ -1,0 +1,11 @@
+# Consider Designs 
+
+Determine the direction of bias in estimating the ATE for each of the following situations when we randomize at the individual level.  Do we over-estimate, or underestimate? Briefly but clearly explain your reasoning.
+
+1. Suppose that you're advertising games -- Among Us? -- to try and increase sales, and you individually randomly-assign people into treatment and control. After you randomize, you learn that some treatment-group members are friends with control-group members IRL. 
+
+> There would be more sales so we would end up underestimating the ate. This effect of more sales is due to spillover.
+
+2. As we're writing this question, end-of-year bonuses are being given out in people's companies. (This is not a concept we have in the program -- each day with your smiling faces is reward enough -- and who needs money anyways?) Suppose that you're interested in knowing whether this is a good idea from the point of view of worker productivity and so you agree to randomly assign bonuses to some people. *What might happen to your estimated treatment effects if people learn about the bonuses that others have received?* 
+
+> Productivity may go down if the workers that did not receive a bonus get upset when they see fellow co workers received one. If this is the case we would over estimated the worth of giving bonuses.

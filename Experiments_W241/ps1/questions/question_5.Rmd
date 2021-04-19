@@ -1,0 +1,11 @@
+# Moral Panic 
+
+Suppose that a researcher finds that high school students who listen to death metal music at least once per week are more likely to perform badly on standardized test. :metal: As a consequence, the researcher writes an opinion piece in which she recommends parents to keep their kids away from "dangerous, satanic music". 
+
+- Let the potential outcomes to control, $Y_i(0)$, be each student's test score when listening to death metal at least one time per week. 
+- Let $Y_i(1)$ be the test score when listening to death metal less than one time per week. 
+
+1. Explain the statement $E[Y_i(0)|D_i=0] = E[Y_i(0)|D_i=1]$ in words. First, state the rote english language translation -- i.e. "The expected value of ..." -- but then, second, tell us the *meaning* of this statement. 
+2. Do you expect that this circumstance actually matches with the meaning that you've just written down? Why or why not? 
+
+

@@ -1,0 +1,100 @@
+---
+title: "Problem Set 1"
+author: "Alex, Micah, and Scott"
+date: "12/01/2020"
+output: github_document
+---
+
+```{r setup, warning=FALSE}
+library(data.table)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, child='questions/question_1.Rmd'}
+```
+
+**1.The potential outcome of a given treated subject.** 
+
+**2.The potential outcome of the first (i = 1) treated subject.** 
+
+**3. Expected value of what the potential outcome would be for treated subjects. We are not able to actually observe this since d = 0.** 
+
+**4. The first one is the expected potential outcome for the entire set of subjects while the second equation is the expected potential outcome for treated subjects. If we properly do random assignment these will be equal values.** 
+```{r, child='questions/question_2.Rmd'}
+```
+```{r}
+table <- data.table(
+  subject = 1:7, 
+  y_0 = c(10, 12, 15, 11, 10, 17, 16), 
+  y_1 = c(12, 12, 18, 14, 15, 18, 16),
+  tau = c(2, 0, 3, 3, 5, 1, 0)
+)
+table
+
+E_y_0 = mean(table[,y_0])
+E_y_1 = mean(table[,y_1])
+
+E_T = mean(table[,tau])
+
+E_y_1 - E_y_0 == E_T
+```
+
+**2. In actually we cannot make this table because each subject can either be treated or not. We can never observe both control and treatment in a single subject. The best we can do is use random assignment by creating two groups of observations that are identical in expectation.**
+```{r, child='questions/question_3.Rmd'}
+```
+```{r}
+d <- data.table(
+  child = 1:10, 
+  y_0 = c(1.2, 0.1, 0.5, 0.8, 1.5, 2.0, 1.3, 0.7, 1.1, 1.4), 
+  y_1 = c(1.2, 0.7, 0.5, 0.8, 0.6, 2.0, 1.3, 0.7, 1.1, 1.4)
+)
+
+d[, tau := y_1-y_0]
+d
+```
+
+**2. The treatment effects are distributed in this way because children in this age have different eye sight due to genetics. Some children have good eye sight when they are young and some need glasses at a young age. This is usually due to genetics or diet (carrots).** 
+
+**3.** 
+
+```{r}
+mean(d[,tau])
+```
+
+**4.** 
+
+```{r}
+d[, treatment := ifelse(child %% 2 == 0, 0, 1)]
+mean(d[treatment==1][,y_1])-mean(d[treatment==0][,y_0])
+
+```
+**5. We are off from the truth because of the way we randomly selected our children there was a bias.** 
+
+**6.** 
+
+```{r}
+2**10 -2
+```
+
+**7.**
+
+```{r}
+d[, treatment := ifelse(child <= 5 , 1, 0)]
+mean(d[treatment==1][,y_1])-mean(d[treatment==0][,y_0])
+```
+**8. This is very far from the true ATE. This can be because children with good eyesight prefer to go outside more. There could be many reasons in an observational study why a subject chooses to do what they did, this is not good for our experiment**
+```{r, child='questions/question_4.Rmd'}
+```
+
+**1. This is an observational study because the researcher did not interfere and give a treatment to two identical groups. Rather, the researcher observed two different groups that by nature are different from each other.** 
+
+**2. This is in between an experiment and observational study because the government did not pick students at random. Becasue of this there is a selection bias. There could be an issue where the students who are picked need it the most so they work extra hard to receive the best grades. This is different from an experiement since it would be two equal groups picked at random to receive the free schooling.** 
+
+**3. If a coin toss was implemented this would now be an experiment because there is no more selection bias. By randomizing our control and treatment groups we no longer need to worry about the case where children in need will try extra hard because this is all inclusive in the study. Randomization ensures the two groups are statistically similar.**
+```{r, child='questions/question_5.Rmd'}
+```
+
+**1. The expected value of the test scores of students when listening to metal once per week is equal to what the expected value of the test scores of students would have been had they listened to metal once per week. We can measure the first value but not the second value. The potential outcome of the test scores for students that listen to metal once per week is the same (it is a value that exisits) if they are in treatment or control.** 
+
+**2. This circumstance does not match the meaning because we cannot measure both these things in real life. We would need to create to statistically equal groups and randomly assign them to control and treatment to have a proper experiement.**

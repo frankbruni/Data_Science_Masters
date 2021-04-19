@@ -1,0 +1,101 @@
+# 4. Another Turnout Question
+
+We're sorry; it is just that the outcome and treatment spaces are so clear! 
+
+Hill and Kousser (2015) report that it is possible to increase the probability that someone votes in the California *Primary Election* simply by sending them a letter in the mail. This is kind of surprising, because who even reads the mail anymore anyways? (Actually, if you talk with folks who work in the space, they'll say, "We know that everybody throws our mail away; we just hope they see it on the way to the garbage.")
+
+Can you replicate their findings? Let's walk through them.
+
+```{r}
+number_rows <- 100 # you should change this for your answer. full points for full data
+
+d <- data.table::fread(
+  input = 'https://ucb-mids-w241.s3-us-west-1.amazonaws.com/hill_kousser_analysis_file.csv')
+```
+
+(As an aside, you'll note that this takes some time to download. One idea is to save a copy locally, rather than continuing to read from the internet. One problem with this idea is that you might be tempted to make changes to this cannonical data; changes that wouldn't be reflected if you were to ever pull a new copy from the source tables. One method of dealing with this is proposed by [Cookiecutter data science](https://drivendata.github.io/cookiecutter-data-science/#links-to-related-projects-and-references).)
+
+Here's what is in that data. 
+
+- `age.bin` a bucketed, descriptive, version of the `age.in.14` variable 
+- `party.bin` a bucketed version of the `Party` variable 
+- `in.toss.up.dist` whether the voter lives in a district that often has close races 
+- `minority.dist` whether the voter lives in a majority minority district, i.e. a majority black, latino or other racial/ethnic minority district 
+- `Gender` voter file reported gender
+- `Dist1-8` congressional and data districts 
+- `reg.date.pre.08` whether the voter has been registered since before 2008 
+- `vote.xx.gen` whether the voter voted in the `xx` general election 
+- `vote.xx.gen.pri` whether the voter voted in the `xx` general primary election 
+- `vote.xx.pre.pri` whether the voter voted in the `xx` presidential primary election 
+- `block.num` a block indicator for blocked random assignment. 
+- `treatment.assign` either "Control", "Election Info", "Partisan Cue", or "Top-Two Info"
+- `yvar` the outcome variable: did the voter vote in the 2014 primary election 
+
+These variable names are horrible. Do two things: 
+
+- Rename the smallest set of variables that you think you might use to something more useful. (You can use `data.table::setnames` to do this.) 
+- For the variables that you think you might use; check that the data makes sense; 
+
+When you make these changes, take care to make these changes in a way that is reproducible. In doing so, ensure that nothing is positional indexed, since the orders of columns might change in the source data). 
+
+While you're at it, you might as well also modify your `.gitignore` to ignore the data folder. Because you're definitely going to have the data rejected when you try to push it to github. And every time that happens, it is a 30 minute rabbit hole to try and re-write git history. 
+
+## Some questions! 
+
+1. **A Simple Treatment Effect**: Load the data and estimate a `lm` model that compares the rates of turnout in the control group to the rate of turnout among anybody who received *any* letter. This model combines all the letters into a single condition -- "treatment" compared to a single condition "control". Report robust standard errors, and include a narrative sentence or two after your code.  
+
+```{r effect of receiving a letter} 
+d[,assigned_treatment:=ifelse(treatment.assign == 'Control',0,1)]
+model_simple <- lm(yvar~assigned_treatment,data= d)
+model_simple_se <- coeftest(model_simple,vcov = vcovHC(model_simple))
+model_simple_se
+```
+
+> the robust standard errors 
+
+2. **Specific Treatment Effects**: Suppose that you want to know whether different letters have different effects. To begin, what are the effects of each of the letters, as compared to control? Estimate an appropriate linear model and use robust standard errors. 
+
+```{r effect of receiving specific letters} 
+
+model_letters <- lm(yvar~as.factor(treatment.assign),data=d)
+model_letters_se <- coeftest(model_letters,vcov=vcovHC(model_letters))
+model_letters_se
+```
+
+> Roughly 4% less peeople turnout to vote as compared to the control group.
+
+3. Does the increased flexibilitiy of a different treatment effect for each of the letters improve the performance of the model? Test, using an F-test. What does the evidence suggest, and what does this mean about whether there **are** or **are not** different treatment effects for the different letters?
+
+```{r f-test}
+model_anova <- var.test(model_simple,model_letters)
+model_anova
+```
+
+4. **More Specific Treatment Effects** Is one message more effective than the others? The authors have drawn up this design as a full-factorial design. Write a *specific* test for the difference between the *Partisan* message and the *Election Info* message. Write a *specific* test for the difference between *Top-Two Info* and the *Election Info* message. Report robust standard errors on both tests and include a short narrative statement after your estimates. 
+
+```{r specific treatment effects}
+model_partisan_vs_info <- 'fill this in'
+model_top_two_vs_info  <- 'fill this in'
+```
+
+5. **Blocks? We don't need no stinking blocks?**  The blocks in this data are defined in the `block.num` variable (which you may have renamed). There are a *many* of blocks in this data, none of them are numerical -- they're all category indicators. How many blocks are there? 
+
+>
+
+6. **SAVE YOUR CODE FIRST** but then try to estimate a `lm` that evaluates the effect of receiving *any letter*, and includes this block-level information. What happens? Why do you think this happens? If this estimate *would have worked* (that's a hint that we don't think it will), what would the block fixed effects have accomplished?
+
+```{r going down with the ship!}
+model_block_fx  <- 'fill this in'
+```
+
+6. Even though we can't estimate this fixed effects model directly, we can get the same information and model improvement if we're *just a little bit clever*. Create a new variable that is the *average turnout within a block* and attach this back to the data.table. Use this new variable in a regression that regresses voting on `any_letter` and this new `block_average`. Then, using an F-test, does the increased information from all these blocks improve the performance of the *causal* model? Use an F-test to check. 
+
+```{r alternate approach}
+model_block_average <- 'fill this in'
+f_test_results      <- 'fill this in'
+
+```
+
+7. Doesn't this feel like using a bad-control in your regression? Has the treatment coefficient changed from when you didn't include the `block_average` measure to when you did? Have the standard errors on the treatment coefficient changed from when you didn't include the `block_average` measure to when you did? Why is this OK to do?
+
+> 

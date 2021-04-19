@@ -1,0 +1,114 @@
+# 2. Fun with the placebo
+
+The table below summarizes the data from a political science experiment on voting behavior. Subjects were randomized into three groups: a baseline control group (not contacted by canvassers), a treatment group (canvassers attempted to deliver an encouragement to vote), and a placebo group (canvassers attempted to deliver a message unrelated to voting or politics).
+
+```{r, echo=FALSE}
+summary_table <- data.table(
+  'Assignment' = c('Baseline', 'Treatment', 'Treatment', 'Placebo', 'Placebo'), 
+  'Treated?'   = c('No', 'Yes', 'No', 'Yes', 'No'), 
+  'N'          = c(2463, 512, 1898, 476, 2108), 
+  'Turnout'    = c(.3008, .3890, .3160, .3002, .3145)
+)
+
+kable(summary_table)
+``` 
+
+## Evaluating the Placebo Group
+
+1. Construct a data set that would reproduce the table. (Too frequently we receive data that has been summarized up to a level that is unuseful for our analysis. Here, we're asking you to "un-summarize" the data to conduct the rest of the analysis for this question.)
+
+```{r construct placebo data}
+
+d = data.table('assignment' = rep(c('Baseline','Treatment','Treatment','Placebo','Placebo'),summary_table[,N]),
+           'treatment' = rep(c(0,1,0,1,0),summary_table[,N]),
+            'turnout' = c(rep(1,741),rep(0,1722),rep(1,200),rep(0,312),rep(1,600),rep(0,1298),rep(1,143),rep(0,333),rep(1,663),rep(0,1445)))
+d
+```
+
+
+
+2. Estimate the proportion of compliers by using the data on the treatment group.
+
+```{r treatment group compliance rate}
+compliance_rate_t <- nrow(d[(assignment=='Treatment' & treatment == 1),])/nrow(d[(assignment=='Treatment'),])
+compliance_rate_t 
+```
+
+3. Estimate the proportion of compliers by using the data on the placebo group.
+
+```{r placebo group compliance rate}
+compliance_rate_p <- nrow(d[(assignment=='Placebo' & treatment == 1),])/nrow(d[(assignment=='Placebo'),])
+compliance_rate_p
+```
+
+4. Are the proportions in parts (1) and (2) statistically significantly different from each other? Provide *a test* and n description about why you chose that particular test, and why you chose that particular set of data. 
+
+```{r proportions difference}
+proportions_difference_test <- prop.test(x=c(512,476),n = c(1898+512,2108+476))
+proportions_difference_test 
+```
+
+> I used a two sample proportions z test to determine that these propotions are significantly different since the p value is less than 0.05.
+
+5. What critical assumption does this comparison of the two groups' compliance rates test? Given what you learn from the test, how do you suggest moving forward with the analysis for this problem? 
+
+> The two group compliance rates tests whether the teatment and placebo are a proper comparision. Since we have a different amount of compliers in placebo and treatment we cannot use the intent to treat, we can use the CACE.
+
+6. Estimate the CACE of receiving the placebo. Is the estimate consistent with the assumption that the placebo has no effect on turnout?
+
+```{r cace of placebo}
+
+itt= (((476/(476+2108))*.3002) + ((2108/(476+2108))*.3145))-.3008
+ittd = 476/(476+2108)
+cace_estimate <- itt/ittd
+cace_estimate
+```
+
+> The cace tells us that the placebo has almost no affect on voter turnout and this is consistent with what we expect.
+
+## Estimate the CACE Several Ways
+
+7. Using a difference in means (i.e. not a linear model), compute the ITT using the appropriate groups' data. Then, divide this ITT by the appropriate compliance rate to produce an estiamte the CACE.  
+
+```{r cace through means }
+itt <-  (((512/(512+1898))*.389) + ((1898/(512+1898))*.316))-.3008
+ittd <- (512/(512+1898))
+cace_means <- itt/ittd 
+cace_means
+```
+
+8. Use two separate linear models to estimate the CACE of receiving the treatment by first estimating the ITT and then dividing by $ITT_{D}$. Use the `coef()` extractor and in line code evaluation to write a descriptive statement about what you learn after your code. 
+
+```{r itt / d}
+itt_model   <- lm(turnout~assignment,data=d)
+
+itt_d_model <- lm(treatment~assignment,data=d)
+cace_estimate <-coef(itt_model)[3]/coef(itt_d_model)[3]
+```
+
+> Estimating the cace of receiving the treatment using two linear models is the same as estimating the cace using the difference in means from the previous part.
+
+9. When a design uses a placebo group, one additional way to estiamte the CACE is possible -- subset to include only compliers in the treatment and placebo groups, and then estimate a linear model. Produce that estimate here. 
+
+```{r cace subset} 
+t = d[(assignment=='Treatment' & treatment == 1) | (assignment=='Placebo' & treatment == 1) ,]
+
+itt_model   <- lm(turnout~assignment,data=t)
+
+itt_d_model <- lm(treatment~assignment,data=t)
+
+cace_subset_model <- coef(itt_model)[2]/coef(itt_d_model)[2]
+cace_subset_model
+```
+
+10. In large samples (i.e. "in expectation") when the design is carried out correctly, we have the expectation that the results from 7, 8, and 9 should be the same. Are they? If so, does this give you confidence that these methods are working well. If not, what explains why these estimators are producing different estimates? 
+
+> 7 and 8 are the same but 9 is different. A possible reason 9 is different is because we are including placebo data and we previously proved that the placebo data is statistically different from the treatment data since they have a different proportion of compliers..
+
+11. In class we discussed that the rate of compliance determines whether one or another design is more efficient. (You can review the textbook expectation on page 162 of _Field Experiments_)). Given the compliance rate in this study, which design *should* provide a more efficient estimate of the treatment effect?
+
+> ITTd < 1/2 implies that a placebo design is prefered. Conventional design is prefered when ITTD > 1/2 since it provides estimates with less sampling variability.
+
+12. When you apply what you've said in part (11) against the data that you are working with, does the {placebo vs. treatment} or the {control vs. treatment} comparison produce an estimate with smaller standard errors? 
+
+> Placebo vs treatment comparison produces smaller standard errors since the comparision would be less noisy by dropping out the never takers. It is less practical since in most cases it takes more resources to carry out a placebo design.

@@ -1,0 +1,73 @@
+# 3. Sports Cards
+
+In this experiment, the experimenters invited consumers at a sports card trading show to bid against one other bidder for a pair trading cards.  We abstract from the multi-unit-auction details here, and simply state that the treatment auction format was theoretically predicted to produce lower bids than the control auction format.  We provide you a relevant subset of data from the experiment.
+
+In this question, we are asking you to produce p-values and confidence intervals in three different ways: 
+
+1. Using a `t.test`; 
+2. Using a regression; and,
+3. Using randomization inference. 
+
+```{r load cards data }
+d <- fread('../data/list_data_2019.csv')
+```
+
+1. Using a `t.test`, compute a 95% confidence interval for the difference between the treatment mean and the control mean. After you conduct your test, write a narrative statement, using inline code evaluation that describes what your tests find, and how you interpret these results. (You should be able to look into `str(t_test_cards)` to find the pieces that you want to pull to include in your written results.) 
+
+```{r cards t-test}
+
+t_test_cards <- t.test(d[uniform_price_auction==1,bid]-d[uniform_price_auction==0,bid]) # this should be the t.test object. Extract pieces from this object in-text below the code chunk. 
+t_test_cards
+```
+
+**This t test tells us that we can reject the null and say that there is a difference in means between the types of auctions. The 95% confindence interval tells us if did this experiement 100 times the true mean will fall within the bounds [-21,-3] 95 times.**
+
+2. In plain language, what does this confidence interval mean? 
+
+>The 95% confindence interval tells us if did this experiement 100 times the true mean will fall within the bounds [-21,-3] 95 times.
+
+3. Conduct a randomization inference process using an estimator that you write by hand (i.e. in the same way as earlier questions). On the sharp-null distribution that this process creates, compute the 2.5% quantile and the 97.5% quantile using the function `quantile` with the appropriate vector passed to the `probs` argument. After you conduct your test, write a narrative statement of your test results. 
+
+```{r cards randomization inference} 
+## first, do you work for the randomization inference
+ri <- function(simulations = 10000) {
+  
+  res <- NA   
+  
+  for(sim in 1:simulations) { 
+    d[,uniform_price_auction:=sample(c(0,1),replace=TRUE,size=68)]
+    x =  d[ , .(mean_bids = mean(bid)), keyby = uniform_price_auction]
+    res[sim] <-x[uniform_price_auction==1,mean_bids]- x[uniform_price_auction==0,mean_bids]
+  }
+  return(res)
+}
+ri_distribution <- ri() # numeric vector of length equal to your number of RI permutations
+ri_quantiles    <- quantile(ri_distribution,c(0.025,0.975)) # there's a built-in to pull these. 
+```
+```{r}
+ri_quantiles
+```
+
+**The quantile tells us that 95% of our data is between -9 and 9.**
+
+4. Do you learn anything different if you regress the outcome on a binary treatment variable? To answer this question, regress `bid` on a binary variable equal to 0 for the control auction and 1 for the treatment auction and then calculate the 95% confidence interval using *classical standard errors* (in a moment you will calculate with *robust standard errors*). There are two ways to do this -- you can code them by hand; or use a built-in, `confint`. After you conduct your test, write a narrative statement of your test results. 
+
+```{r cards ols regression}
+d <- fread('../data/list_data_2019.csv')
+
+mod <- lm(bid ~ uniform_price_auction, data=d) # this should be a model object, class = 'lm'. 
+confint(mod)
+```
+
+**Our results are similar to the first part. 95% of our data is between -20 and -3 with a mean of -12.** 
+
+5. Calculate the 95% confidence interval using robust standard errors, using the `sandwich` package. There is a function in `lmtest` called `coefci` that can help with this. It is also possible to do this work by hand. After you conduct your test, write a narrative statement of your test results.
+
+```{r cards robust ci}
+library(sandwich)
+coefci(mod)
+```
+
+6. Characterize what you learn from each of these different methods -- are the results contingent on the method of analysis that you choose? 
+
+**I think random inference is a better method since we are running our simulation thousands of times and comparing rather than doing a detailed analysis on one of those possible ranndomizations of treatment and control. Our t test and confidence intervals can we skewed on any given outcome of the data.**

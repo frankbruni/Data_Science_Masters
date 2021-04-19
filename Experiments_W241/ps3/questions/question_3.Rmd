@@ -1,0 +1,27 @@
+# 3. Multifactor Experiments 
+
+Staying with the same experiment, now think about multifactor experiments. 
+
+1. What is the full experimental design for this experiment?  Tell us the dimensions, such as 2x2x3.  (Hint: the full results appear in Panel 4B.)
+
+> 3x2x2 because you get a bin with sticker, bin without sticker, or no bin (3) you have a phone or you dont have a phone(2) and you get a personal message or you get a generic message(2).
+
+2. In the results of Table 4B, describe the baseline category. That is, in English, how would you describe the attributes of the group of people for whom all dummy variables are equal to zero?
+
+> The baselines tell you the value of that category before a person receives treatment. 
+
+3. In column (1) of Table 4B, interpret the magnitude of the coefficient on "bin without sticker."  What does it mean?
+
+> The ATE from bin without sticker is lower than the ATE for bin with sticker. It is highly significant with Avg. no of bins turned in per week, Avg. Weight of recyclables turned in per week, and avg market value of recyclables per week. It is significant with Percentage of visits turned in bag. It is not significant with avg percentage of contamination per week.
+
+4. In column (1) of Table 4B, which seems to have a stronger treatment effect, the recycling bin with message sticker, or the recycling bin without sticker?  How large is the magnitude of the estimated difference?
+
+> Bin with sticker is consistently higher ATE than bin without sticker. Roughly between 0.02 and 0.03.
+
+5. Is this difference you just described statistically significant?  Explain which piece of information in the table allows you to answer this question.
+
+> This is significant because the ATE are all significant and the standard error are almost exactly the same.
+
+6. Notice that Table 4C is described as results from "fully saturated" models.  What does this mean?  Looking at the list of variables in the table, explain in what sense the model is "saturated."
+
+> They did every combination of the experiment treatments. There are no other treatment effects you can explore so it is essentially saturated.

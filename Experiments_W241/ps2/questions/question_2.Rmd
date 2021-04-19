@@ -1,0 +1,113 @@
+# 2. Randomization Inference Practice
+
+Suppose that you've been hired as the data scientist at a quack nootropics company. Despite their fraudulent intent, you're dedicated to doing good data science. Or, at least science as good as you can. 
+
+Their newest serum, *kniht* purports to raise its users' executive function. You think that it is just amphetamines. 
+
+As the data scientist for the company, you convince them to conduct a trial. Great! The good news is this:
+
+- Each person is measured twice.
+- Before one of the measurements, they are given a placebo. Before the other of the measurements they are given *kniht*. 
+- You ask for instrumentation on two concepts: 
+  - Creativity, measured as number of proposed alternative uses of an object. (This is a classic, test of "creativity", proposed by J.P. Guilford. For example, how many things can you propose doing with a camera tripod? )
+  - Physical Arousal, measured through skin conductance (i.e. how sweaty is someone). 
+  
+The bad news is this: The company knows that they're selling nonsense, and they don't want you to be able to prove it. They reason that if they provide you only six test subjects, that you won't be able to prove anything, and that they can hide behind a "fail-to-reject" claim. 
+
+```{r}
+kniht <- data.table(
+  person  = rep(LETTERS[1:6], each = 4), 
+  treat   = rep(0:1, each = 2), 
+  measure = rep(c('creative', 'sweat'))
+)
+
+
+kniht[measure == 'creative' & treat == 0, 
+      value := c(10, 13, 14, 16, 25, 40)]
+kniht[measure == 'creative' & treat == 1, 
+      value := c(12, 11, 13, 20, 21, 46)]
+kniht[measure == 'sweat' & treat == 0, 
+      value := c(0.4, 0.7, 0.3, 0.8, 1.0, 1.4)]
+kniht[measure == 'sweat' & treat == 1, 
+      value := c(0.4, 0.7, 2.0, 0.9, 1.6, 2.2)]
+```
+
+Conduct the following tests. 
+
+1. Conduct the appropriate t-test that respects the repeated-measures nature of the data (is this a paired or independent samples t-test?) for both the `creative` and the `sweat` outcomes. After you conduct your tests, write a narrative statement about what you conclude. 
+
+```{r creative t-test}
+creat=kniht[measure=='creative']
+t_test_creative <- t.test(creat[treat==0,value],creat[treat==1,value],paired=TRUE)
+t_test_creative
+```
+
+**With a p value greater than 0.05 there is not enough evidence to conclude the difference in means is significantly different from 0**
+
+```{r sweat t-test}
+sweat=kniht[measure=='sweat']
+t_test_sweat <- t.test(sweat[treat==0,value],sweat[treat==1,value],paired=TRUE)
+t_test_sweat
+```
+
+**With a p value greater than 0.05 there is not enough evidence to conclude the difference in means is significantly different from 0**
+
+2. Conduct the appropriate randomization inference test that respects the repeated-measures nature of the data. After you conduct your tests, write a narrative statement about what you conclude.  
+
+```{r creative ri}
+# do your work, and then save your computed p-value in the object
+creat=kniht[measure=='creative']
+creat_mean = creat[ , .(mean_value = mean(value)), keyby = treat]
+
+randomize <- function(units_per_group) { 
+  assignment_vector <- rep(c(1, 0), each = units_per_group)
+  sample(assignment_vector)
+} 
+ri <- function(simulations = 10000) {
+  
+  res <- NA   
+  
+  for(sim in 1:simulations) { 
+    d=creat
+    d[,treat:=randomize(6)]
+    x =  d[ , .(mean_value = mean(value)), keyby = treat]
+    res[sim] <-x[treat==1,mean_value]- x[treat==0,mean_value]
+  }
+  return(res)
+}
+
+creative_ate     <- creat_mean[treat==1,mean_value]- creat_mean[treat==0,mean_value] 
+creative_ri      <- ri(10000)
+creative_p_value <- sum(creative_ri >= creative_ate)/10000
+creative_p_value
+```
+
+```{r sweat ri}
+# do your work, and then save your computed p-value in the object
+sweat=kniht[measure=='sweat']
+sweat_mean = sweat[ , .(mean_value = mean(value)), keyby = treat]
+
+ri <- function(simulations = 10000) {
+  
+  res <- NA   
+  
+  for(sim in 1:simulations) { 
+    d=sweat
+    d[,treat:=randomize(6)]
+    x =  d[ , .(mean_value = mean(value)), keyby = treat]
+    res[sim] <-x[treat==1,mean_value]- x[treat==0,mean_value]
+  }
+  return(res)
+}
+
+sweat_ate     <- sweat_mean[treat==1,mean_value]- creat_mean[treat==0,mean_value] 
+sweat_ri      <- ri(10000)
+sweat_p_value <- sum(sweat_ri >= sweat_ate)/10000
+sweat_p_value
+```
+
+**Both p values are again greater than0.05 which means we cannot reject the sharp null that the treatment effect is significant.**
+
+3. Which of these tests are more appropriate to the task at hand, and why? Based on the tests that you have run, what do you conclude about the effectiveness of *kniht*? 
+
+**The random inference tests are more appropriate because the null hypothesis is more closely alligned with what we are concerned with. We want to know if the treatment has a signifcant effect, not just if the difference in means is 0. To do this we have to assume a sharp null and randomly assign control and treatment groups. At the end of the day both tests yield a similar result.**

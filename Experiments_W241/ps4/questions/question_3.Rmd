@@ -1,0 +1,119 @@
+# 3. Turnout in Dorms
+
+Guan and Green report the results of a canvassing experiment conduced in Beijing on the eve of a local election. Students on the campus of Peking University were randomly assigned to treatment or control groups. 
+
+- Canvassers attempted to contact students in their dorm rooms and encourage them to vote. 
+- No contact with the control group was attempted. 
+- Of the 2,688 students assigned to the treatment group, 2,380 were contacted. 
+- A total of 2,152 students in the treatment group voted; of the 1,334 students assigned to the control group, 892 voted. 
+- One aspect of this experiment threatens to violate the exclusion restriction. At every dorm room they visited, even those where no one answered, canvassers left a leaflet encouraging students to vote. 
+
+```{r read dorm data}
+d <- fread('https://ucb-mids-w241.s3-us-west-1.amazonaws.com/Guan_Green_CPS_2006.csv')
+d
+```
+
+Here are definitions for what is in that data: 
+
+- `turnout` did the person turn out to vote?
+- `treated` did someone at the dorm open the door? 
+- `dormid` a unique ID for the door of the dorm
+- `treatment_group` whether the dorm door was assigned to be treated or not
+
+## Use Linear Regressions 
+
+1. Estimate the ITT using a linear regression on the appropriate subset of data. Notice that there are two `NA` in the data. Just na.omit to remove these rows so that we are all working with the same data. Given the ways that randomization was conducted, what is the appropriate way to construct the standard errors? 
+
+```{r dorm itt}
+d = na.omit(d)
+dorm_model <-lm(turnout ~treatment_group,data = d)
+dorm_model
+coeftest(dorm_model,vcovCL(dorm_model))
+```
+
+> The best way to construct the standard errors is through robust standard errors. This helps account for when the structure of variation is unknown.
+
+## Use Randomization Inference  
+
+1. How many people are in treatment and control? Does this give you insight into how the scientists might have randomized? As ususal, include a narrative setence after your code.   
+
+```{r people in treatment} 
+n_treatment <- 2688
+n_control   <- 1334
+```
+
+> It looks like they assigned more to the treatment to account for the possibility of non compliance. They randomized by dorm room.
+
+2. Write an algorithm to conduct the Randomization Inference. Be sure to take into account the fact that random assignment was clustered by dorm room.
+
+```{r dorm room randomization inference}
+
+treatment_group_mean <- d[, .(group_mean = mean(turnout)), keyby = treatment_group]
+
+ate  <-  treatment_group_mean[treatment_group == 1, group_mean] - treatment_group_mean[treatment_group == 0, group_mean]
+
+ri   <- rep(NA, 1000)
+
+for (i in 1:1000) {
+ri[i] <- d[, .(group = mean(turnout)), keyby = .(sample(treatment_group))][ , .('ate' = diff(group))]
+}
+p_value <- sum(ri >= ate) / 1000
+p_value
+
+```
+```{r}
+riTest <- function(tbl, reps) {
+  riArray <- rep(NA, reps)
+  for (ri in 1:reps) {
+    riArray[ri] <- tbl[, .(mean_value = mean(turnout)), keyby = .(sample(treatment_group))][, diff(mean_value)]
+  }
+  return(riArray)
+}
+getPval <- function(riResults, ate) {
+  res <- (sum(riResults >= ate) + sum(riResults <= -ate)) / length(riResults)
+  return(res)
+}
+
+
+getPval(riTest(d,10000),0.13)
+```
+
+> I got 0 for both p values.
+  
+3. What is the value that you estimate for the treatment effect?
+
+```{r dorm room ATE}
+dorm_room_ate <- sum(riTest(d,10000))/10000
+dorm_room_ate
+```
+  
+4. What are the 2.5% and 97.5% quantiles of this distribution? 
+
+```{r dorm room ri CI}
+riresults = riTest(d,10000)
+
+dorm_room_ci <- c(quantile(riresults,0.025),quantile(riresults,0.975))
+dorm_room_ci
+```
+  
+5. What is the p-value that you generate for the test: How likely is this treatment effect to have been generated if the sharp null hypothesis were true. 
+  
+```{r dorm room ri p-value}
+p_value <- 0
+```
+
+> Very unlikely that the treatment was generated if the sharp null hypothesis was true.
+
+6. Assume that the leaflet (which was left in case nobody answered the door) had no effect on turnout. Estimate the CACE either using ITT and ITT_d or using a set of linear models. What is the CACE, the estimated standard error of the CACE, and the p-value of the test you conduct?  
+  
+```{r dorm room cace}
+itt = lm(turnout~treatment_group, data = d)
+ittd = lm(treated ~ treatment_group, data = d)
+
+dorm_room_cace <- coef(itt)[2]/coef(ittd)[2]
+dorm_room_cace
+```  
+  
+7. What if the leaflet that was left actually *did* have an effect? Is it possible to estimate a CACE in this case? Why or why not? 
+
+> We would not be able to determine the effects of the leaflet since we do not know who received the leaflets.

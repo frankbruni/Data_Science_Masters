@@ -1,0 +1,6 @@
+# Potential Outcomes Notation 
+
+1. Explain the notation $Y_i(1)$.
+2. Explain the notation $Y_1(1)$.
+3. Explain the notation $E[Y_i(1)|d_i=0]$.
+4. Explain the difference between the notation $E[Y_i(1)]$ and $E[Y_i(1)|d_i=1]$

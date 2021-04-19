@@ -1,0 +1,79 @@
+# 1. Replicate Results 
+
+Skim [Broockman and Green's](./readings/brookman_green_ps3.pdf) paper on the effects of Facebook ads and download an anonymized version of the data for Facebook users only.
+
+```{r}
+d <- fread("../data/broockman_green_anon_pooled_fb_users_only.csv")
+d
+``` 
+
+1. Using regression without clustered standard errors (that is, ignoring the clustered assignment), compute a confidence interval for the effect of the ad on candidate name recognition in Study 1 only (the dependent variable is `name_recall`). After you estimate your model, write a narrative description about what you've learned. 
+
+  - **Note**: Ignore the blocking the article mentions throughout this problem.
+  - **Note**: You will estimate something different than is reported in the study. 
+
+```{r estimate lm}
+study1 = d[d$studyno==1]
+mod_study1 <- lm(name_recall~treat_ad,data=study1) # should be a lm class object
+confint(mod_study1)
+```
+>For people in study 1 the effect of being shown the ad is between -.05 and 0.03 which means we cannot come to a conclusion that name_recall is effected by the ad.
+
+
+2. What are the clusters in Broockman and Green's study? Why might taking clustering into account increase the standard errors?
+
+> The study clustered across 18 age ranges, 35 towns, and 2 genders. Taking clustering into account would increase the standard errors because there could exist a relationship between each of the clusters and the outcome of interest. Our randomization is not as perfect because of this. Clustering is not ideal but sometimes due to experimental setup is neccessary.
+
+3. Estimate a regression that estimates the effect of the ad on candidate name recognition in Study 1, but this time take take clustering into account when you compute the standard errors. 
+  - The estimation of the *model* does not change, only the estimation of the standard errors. 
+  - You can estimate these clustered standard errors using `sandwich::vcovCL`, which means: "The `vcovCL` function from the `sandwich` package. 
+  - We talk about this more in code that is availbe in the course repo.
+
+```{r estimate study 1 lm with clustered SEs}
+coefci(x=mod_study1,level=0.95,vcov=sandwich::vcovCL(mod_study1,cluster= study1$cluster))
+```
+
+4. Change the context: estimate the treatment effect in Study 2, using clustered standard errors. If you've written your code for part 3 carefully, you should be able to simply change the row-scoping that you're calling. If you didn't write it carefully, for legibility for your colleagues, you might consider re-writting your solution to the last question. Descriptively, do the treatment effects look different between the two studies? Are you able to conduct a formal test by comparing these coefficients? Why, or why not?  
+
+```{r estimate study 2 lm with clustered SEs}
+
+study2 = d[d$studyno==2]
+mod_study2 <- lm(name_recall~treat_ad,data=study2) # should be a lm class object
+coefci(x=mod_study2,level=0.95,vcov=sandwich::vcovCL(mod_study2,cluster= study2$cluster))
+```
+
+> 
+
+5. Run a regression to test for the effect of the ad on candidate name recognition, but this time use the entire sample from both studies -- do not take into account which study the data is from (more on this in a moment), but just "pool" the data. 
+  - Does this estimate tell you anything useful? 
+  - Why or why not? 
+  - Can you say that the treatment assignment procedure used is fully random when you estimate this model? Or is there some endogeneous process that could be confounding your estimate? 
+
+```{r estimate a lm ignoring the study indicator}
+mod_pooled <- lm(name_recall~treat_ad,data=d) # should be a lm class object
+coefci(x=mod_pooled,level=0.95,vcov=sandwich::vcovCL(mod_pooled,cluster=d[,cluster]))
+```
+
+> Since the 95% confidence interval does not include 0 we know the treatment effect is below 0.
+
+6. Estimate a model that uses all the data, but this time include a variable that identifies whether an observation was generated during Study 1 or Study 2. 
+  - What is estimated in the "Study 2 Fixed Effect"? 
+  - What is the treatment effect estimate and associated p-value? 
+  - Think a little bit more about the treatment effect that you've estimated: Can this treatment effect, as you've entered it in the model be *different* between Study 1 and Study 2? 
+  - Why or why not? 
+
+```{r}
+mod_fe <- lm(name_recall~treat_ad+as.factor(studyno),data=d)
+
+summary(mod_fe)
+summary(mod_fe)$coefficients[2,4]
+```
+
+> 
+
+7. Estimate a model that lets the treatment effects be different between Study 1 and Study 2. With this model, conduct a formal test -- it must have a p-value associated with the test -- for whether the treatment effects are different in Study 1 than Study 2. 
+
+```{r}
+mod_interaction <- lm(name_recall~treat_ad:as.factor(studyno)+as.factor(studyno),data=d)
+summary(mod_interaction)
+```

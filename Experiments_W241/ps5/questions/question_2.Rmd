@@ -1,0 +1,91 @@
+# 2. Vietnam Draft Lottery 
+
+A [famous paper](http://sites.duke.edu/niou/files/2011/06/Angrist_lifetime-earningsmall.pdf) by Angrist exploits the randomized lottery for the Vietnam draft to estimate the effect of education on wages. (*Don’t worry about reading this article, it is just provided to satisfy your curiosity; you can answer the question below without referring to it. In fact, it may be easier for you not to, since he has some complications to deal with that the simple data we’re giving you do not.*)
+
+## Problem Setup
+
+Angrist’s idea is this: During the Vietnam era, draft numbers were determined randomly by birth date -- the army would literally randomly draw birthdays out of a hat, and those whose birthdays came up sooner were higher up on the list to be drafted first. For example, all young American men born on May 2 of a given year might have draft number 1 and be the first to be called up for service, followed by November 13 who would get draft number 2 and be second, etc. The higher-ranked (closer to 1) your draft number, the likelier it was you would be drafted.
+
+We have generated a fake version of this data for your use in this project. You can find real information [here](https://www.sss.gov/About/History-And-Records/lotter1). While we're defining having a high draft number as falling at 80, in reality in 1970 any number lower than 195 would have been a "high" draft number, in 1971 anything lower than 125 would have been "high". 
+
+High draft rank induced many Americans to go to college, because being a college student was an excuse to avoid the draft -- so those with higher-ranked draft numbers attempted to enroll in college for fear of being drafted, whereas those with lower-ranked draft numbers felt less pressure to enroll in college just to avoid the draft (some still attended college regardless, of course). Draft numbers therefore cause a natural experiment in education, as we now have two randomly assigned groups, with one group having higher mean levels of education, those with higher draft numbers, than another, those with lower draft numbers. (In the language of econometricians, we say the draft number is “an instrument for education,” or that draft number is an “instrumental variable.”)
+
+Some simplifying assumptions:
+
+- Suppose that these data are a true random sample of IRS records and that these records measure every living American’s income without error.
+- Assume that the true effect of education on income is linear in the number of years of education obtained.
+- Assume all the data points are from Americans born in a single year and we do not need to worry about cohort effects of any kind.
+
+
+```{r load draft data}
+d <- fread("../data/ps5_no2.csv")
+d$highrank <- ifelse(d$draft_number >80, "Low", "High")
+d
+```
+
+## Questions to Answer
+
+1. Suppose that you had not run an experiment. Estimate the "effect" of each year of education on income as an observational researcher might, by just running a regression of years of education on income (in R-ish, `income ~ years_education`). What does this naive regression suggest?
+
+```{r observational model} 
+model_observational <- lm(income~years_education,data=d)
+model_observational
+```
+
+> This suggests every year of education results in an added $5,570 to a subjects income.
+
+2. Continue to suppose that we did not run the experiment, but that we saw the result that you noted in part 1. Tell a concrete story about why you don't believe that observational result tells you anything causal. 
+
+> Age and experience plays a role in income and whether or not a subject was drafted will greatly change their age and years of education when they enter the workforce.
+
+3. Now, let’s get to using the natural experiment. Define "having a high-ranked draft number" as having a draft number between 1-80. For the remaining 285 days of the year, consider them having a "low-ranked" draft number). Create a variable in your dataset indicating whether each person has a high-ranked draft number or not. Using a regression, estimate the effect of having a high-ranked draft number on years of education obtained. Report the estimate and a correctly computed standard error. (*Hint: How is the assignment to having a draft number conducted? Does random assignment happen at the individual level? Or, at some higher level?)
+
+```{r draft effect on education}
+model_education <- lm(years_education~as.factor(highrank),data=d)
+coeftest(model_education, .vcov = vcovHC(model_education))
+```
+
+> The individuals in the low group have 2 years less schooling on average.
+
+4. Using linear regression, estimate the effect of having a high-ranked draft number on income. Report the estimate and the correct standard error.
+
+```{r draft effect on income} 
+model_income <- lm(income~as.factor(highrank),data=d)
+coeftest(model_income, .vcov = vcovHC(model_income))
+```
+
+> The individuals in the low group get $6000 less on average which makes sense since they have less schooling as well.
+
+5. Now, estimate the Instrumental Variables regression to estiamte the effect of education on income. To do so, use `AER::ivreg`. After you evaluate your code, write a narrative description about what you learn. 
+
+```{r instrumental variables regression} 
+model_iv <-ivreg(income ~ years_education|as.factor(highrank), data = d)
+model_iv
+```
+
+> I learned that income depends not only on education but also if you were drafted or not.
+
+6. Just like the other experiments that we've covered in the course, natural experiments rely crucially on satisfying the "exclusion restriction". 
+
+In the case of a medical trial, we've said this means that there can't be an effect of just "being at the doctor's office" when the doctor is giving you a treatment. In the case of an instrumental variable's setup, the *instrument* (being drafted) cannot affect the outcome (income) in any other way except through its effect on the "endogenous variable" (here, education). 
+
+Give one reason this requirement might not be satisfied in this context. In what ways might having a high draft rank affect individuals' income **other** than nudging them to attend more school? 
+
+> Individuals that are drafted get experience in the war such as flying planes which gives them a higher income without needing education.
+
+7. Conduct a test for the presence of differential attrition by treatment condition. That is, conduct a formal test of the hypothesis that the “high-ranked draft number” treatment has no effect on whether we observe a person’s income. **(Note, that an earning of $0 *actually* means they didn't earn any money -- i.e. earning $0 does not mean that their data wasn't measured.)**
+```{r}
+low = length(d[d$highrank=='Low']$highrank)
+high = length(d[d$highrank=='High']$highrank)
+```
+
+```{r differential attrition}
+model_differential_attrition <- prop.test(c(high,low),c(low+high,low+high),c(80/365,1-(80/365)))
+model_differential_attrition
+```
+
+> This p value means we can reject the null that the high ranked draft number has no effect on whether we observe a person income.
+
+8. Tell a concrete story about what could be leading to the result in part 7. How might this differential attrition create bias in the estimates of a causal effect?
+
+> High ranked individuals get drafted and can possibly die in the war. Out of the high ranked individuals we are more often seeing the case in which they choose to go to school to avoid the draft and have a high income. We miss the case where they get drafted and pass away and cannot report their income.
