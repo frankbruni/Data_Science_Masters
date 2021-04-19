@@ -1,0 +1,826 @@
+    1  ls -la
+    2  docker pull midsw205/base
+    3  ls
+    4  cd w205
+    5  ls
+    6  cd ..
+    7  cd w205/course-content/
+    8  ls
+    9  ls -l
+   10  cd ..
+   11  ls
+   12  cd ..
+   13  ls
+   14  cd w205/
+   15  ls
+   16  pwd
+   17  git clone https://github.com/mids-w205-crook/signup-frankbruni.git
+   18  ls
+   19  cd signup-frankbruni/
+   20  ls
+   21  git status
+   22  ls -l
+   23  git branch assignment
+   24  git status
+   25  ls
+   26  git checkout assignment
+   27  git status
+   28  ls
+   29  vi
+   30  ls -la
+   31  mkdir ~/w205
+   32  ls
+   33  ls -l
+   34  ls
+   35  cd w205
+   36  ls
+   37  https://github.com/mids-w205-crook/course-content.git
+   38  ls
+   39  git clone https://github.com/mids-w205-crook/course-content.git
+   40  ls
+   41  cd course-content/
+   42  ls
+   43  cd ..
+   44  ;s
+   45  ls
+   46  git status
+   47  ls
+   48  cd signup-frankbruni/
+   49  ls
+   50  git status
+   51  ls
+   52  vi README.md
+   53  ls
+   54  cd w205/
+   55  ls
+   56  cd signup-frankbruni/
+   57  ls
+   58  vi READ.md
+   59  ls
+   60  vi README.md
+   61  git status
+   62  git add README.md
+   63  git status
+   64  git commit -m "my new readme"
+   65  ls
+   66  git status
+   67  git clean -n
+   68  git clean -f
+   69  git status
+   70  git commit -m "my new readme"
+   71  git config --global user.email "xxxx"
+   72  git config --global user.name "xxx"
+   73  git commit -m "my new readme"
+   74  ls
+   75  git push origin assignment
+   76  ls
+   77  cd ..
+   78  ls
+   79  cd ..
+   80  docker run -it --rm -v ~/w205:/w205 midsw205/base:latest bash
+   81  ls
+   82  cd w205/
+   83  ls
+   84  git status
+   85  ls
+   86  rm my_file.txt
+   87  ls
+   88  git clone https://github.com/mids-w205-crook/project-1-frankbruni.git
+   89  ls
+   90  cd project-1-frankbruni/
+   91  ls
+   92  git status
+   93  git branch assignment
+   94  git status
+   95  git checkout assignment
+   96  git stats
+   97  git status
+   98  ls
+   99  git status
+  100  ls
+  101  exit
+  102  clear
+  103  cd ~/w205
+  104  curl -L -o annot_fpid.json https://goo.gl/qWiu7d
+  105  ls
+  106  curl -L -o lp_data.csv https://goo.gl/FDFPYB
+  107  ls
+  108  ls -l
+  109  jq
+  110  head lp_data.csv
+  111  head -n1 lp_data.csv
+  112  cat lp_data.csv | wc -l
+  113  cat lp_data.csv | sort
+  114  man sort
+  115  clear
+  116  cat lp_data.csv | sort -g
+  117  cat lp_data.csv | sort -n
+  118  head annot_fpid.json
+  119  clear
+  120  cat annot_fpid.json | jq .
+  121  cat annot_fpid.json | jq '.[][]'
+  122  clear
+  123  cat annot_fpid.json | jq '.[][]' -r | sort | uniq -c | sort -gr | head -10
+  124  bq
+  125  bq query --use_legacy_sql=false 'SELECT count(*) FROM `bigquery-public-data.san_francisco.bikeshare_status`'
+  126  bq query --use_legacy_sql=false 'SELECT count(distinct station_id) FROM `bigquery-public-data.san_francisco.bikeshare_status`'
+  127  exit
+  128  clear
+  129  docker ps
+  130  docker images
+  131  cd ~/w205/course-content/
+  132  git pull --all
+  133  Ilikemiketrout27
+  134  git pull --all
+  135  docker ps -a
+  136  docker network ls
+  137  clear
+  138  docker run -it --rm -v ~/w205:/w205 midsw205/base:latest bash
+  139  docker ps -a
+  140  docker run -it --rm -v ~/w205:/w205 midsw205/base pwd
+  141  clear
+  142  docker ps -a
+  143  ls
+  144  cd w205/
+  145  ls
+  146  course-content/
+  147  git pull --all
+  148  cd course-content/
+  149  git pull --all
+  150  cd ../..
+  151  docker-compose
+  152  sudo apt update
+  153  sudo apt install docker-compose
+  154  docker-compose
+  155  docker run redis
+  156  docker ps -a
+  157  docker rm -f 991aec931649 
+  158  docker rm -f e241d06ed929
+  159  docker ps -a
+  160  docker run -d redis
+  161  docker ps -a
+  162  docker rm -f 74550212e4a9
+  163  docker ps -a
+  164  sudo pip3 install redis
+  165  pip install redis
+  166  clear
+  167  mkdir ~/w205/redis-standalone
+  168  cd ~/w205/redis-standalone
+  169  cp ../course-content/05-Storing-Data-II/example-0-docker-compose.yml docker-compose.yml
+  170  ls
+  171  ls -lh
+  172  docker-compose up -d
+  173  docker-compose ps
+  174  docker-compose logs redis
+  175  ipython
+  176  docker-compose down
+  177  docker-compose ps
+  178  docker ps -a
+  179  mkdir ~/w205/redis-cluster
+  180  cd ~/w205/redis-cluster
+  181  cp ../course-content/05-Storing-Data-II/example-1-docker-compose.yml docker-compose.yml
+  182  docker-compose up -d
+  183  docker-compose ps
+  184  docker ps -a
+  185  docker-compose logs redis
+  186  docker-compose exec mids bash
+  187  docker-compose down
+  188  docker-compose ps
+  189  cp ../course-content/05-Storing-Data-II/example-2-docker-compose.yml docker-compose.yml
+  190  docker-compose up -d
+  191  docker ps -a
+  192  docker-compose exec mids jupyter notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root
+  193  docker-compose down
+  194  docker-compose ps
+  195  docker ps -a
+  196  cp ../course-content/05-Storing-Data-II/example-3-docker-compose.yml docker-compose.yml
+  197  docker-compose up -d
+  198  docker-compose logs mids
+  199  docker-compose down
+  200  ls
+  201  cp ../course-content/05-Storing-Data-II/example-4-docker-compose.yml docker-compose.yml
+  202  cd ~/w205/
+  203  curl -L -o trips.csv https://goo.gl/QvHLKe
+  204  cd ~/w205/redis-cluster
+  205  docker-compose up -d
+  206  docker-compose logs mids
+  207  docker-compose down
+  208  docker-compose ps
+  209  docker ps -a
+  210  ls
+  211  ls -l
+  212  cd ..
+  213  ls -l
+  214  exit
+  215  ls
+  216  cd w205/
+  217  ls
+  218  cd project-1-frankbruni/
+  219  ls
+  220  git status
+  221  atom --help
+  222  vi README.md 
+  223  ls
+  224  git status
+  225  git add README.md 
+  226  git status
+  227  git commit -m "modify readme"
+  228  git status
+  229  ls
+  230  vi README.md 
+  231  git status
+  232  git branch
+  233  git branch --show-current
+  234  git branch
+  235  git status
+  236  git push origin assignment
+  237  ls
+  238  vi README.md 
+  239  ls
+  240  git status
+  241  ls
+  242  vi README.md 
+  243  ls
+  244  git status
+  245  git add README.md 
+  246  git status
+  247  git commit -m "modify readme"
+  248  git push origin assignment
+  249  git statu
+  250  git status
+  251  vi README.md 
+  252  git status
+  253  git add README.md 
+  254  git commit -m "modify readme"
+  255  git push origin assignment
+  256  bq query --use_legacy_sql=false '
+  257      SELECT count(*)
+  258      FROM
+  259         `bigquery-public-data.san_francisco.bikeshare_trips`'
+  260  vi README.md 
+  261  ls
+  262  cd w205/
+  263  ls
+  264  cd project-1-frankbruni/
+  265  ls
+  266  vi README.md 
+  267  git status
+  268  git add README.md 
+  269  git commit -m "modify readme"
+  270  git push origin assignment
+  271  ls
+  272  git status
+  273  exit
+  274  docker pull midsw205/base:latest
+  275  docker pull midsw205/base:0.1.8
+  276  docker pull midsw205/base:0.1.9
+  277  docker pull redis
+  278  docker pull confluentinc/cp-zookeeper:latest
+  279  docker pull confluentinc/cp-kafka:latest
+  280  docker pull midsw205/spark-python:0.0.5
+  281  docker pull midsw205/spark-python:0.0.6
+  282  docker pull midsw205/cdh-minimal:latest
+  283  docker pull midsw205/hadoop:0.0.2
+  284  docker pull midsw205/presto:0.0.1
+  285  exit
+  286  clear
+  287  ls
+  288  cd w205/
+  289  ls
+  290  cd project-1-frankbruni/
+  291  ls
+  292  vi README.md 
+  293  ls
+  294  git status
+  295  git add README.md 
+  296  git commit -m "modify readme"
+  297  git push origin assignment
+  298  vi README.md 
+  299  git add README.md 
+  300  git commit -m "modify readme"
+  301  git push origin assignment
+  302  vi README.md 
+  303  git add README.md 
+  304  git commit -m "modify readme"
+  305  git push origin assignment
+  306  ls
+  307  cd w205/
+  308  ls
+  309  cd project-1-frankbruni/
+  310  ls
+  311  pip install --upgrade google-cloud-bigquery[pandas]
+  312  ls
+  313  cd w205/
+  314  ls
+  315  cd project-1-frankbruni/
+  316  ls
+  317  git status
+  318  git add all
+  319  git add --all
+  320  git status
+  321  git commit -a -m "adding jupyter notebook"
+  322  git status
+  323  git push origin assignment
+  324  git status
+  325  git add --all
+  326  git commit -a -m "updating jupyter notebook"
+  327  git push origin assignment
+  328  ls
+  329  git status
+  330  git add --all
+  331  git commit -a -m "updating jupyter notebook"
+  332  git push origin assignment
+  333  ls
+  334  cd w205/
+  335  ls
+  336  cd project-1-frankbruni/
+  337  ls
+  338  jupyter notebook
+  339  ls
+  340  git status
+  341  git add --all
+  342  git commit -m -a "add csv files"
+  343  git commit -a -m "add csv files"
+  344  git status
+  345  git push origin assignment
+  346  git status
+  347  git push origin assignment
+  348  git status
+  349  git add --all
+  350  git commit -a -m "add csv files"
+  351  git push origin assignment
+  352  git status
+  353  git add --all
+  354  git commit -a -m "add csv files"
+  355  git push origin assignment
+  356  ls
+  357  git reset HEAD^ -- hour_seconds.csv 
+  358  git status
+  359  git reset HEAD hour_seconds.csv 
+  360  git status
+  361  git add Project_1.ipynb 
+  362  git commit -m "uodate jupyter"
+  363  git push origin assignment
+  364  git status
+  365  got rm hour_seconds.csv 
+  366  git rm hour_seconds.csv 
+  367  ls
+  368  git status
+  369  git push origin assigment
+  370  git status
+  371  git add --all
+  372  git commit -a -m "add csv files"
+  373  git push origin assigment
+  374  git status
+  375  git add --all
+  376  git commit -a -m "add csv files"
+  377  git push origin assigment
+  378  git status
+  379  git add .
+  380  git status
+  381  git checkout assignment
+  382  git push origin assignment
+  383  git rm hour_seconds.csv 
+  384  git status
+  385  git push origin assignment
+  386  git status
+  387  git rm hour_seconds.csv
+  388  git reset HEAD hour_seconds.csv
+  389  git status
+  390  git add Project_1.ipynb 
+  391  git commit -m "update jupyter"
+  392  git push origin assignment
+  393  git status
+  394  git rm hour_seconds.csv
+  395  git status
+  396  git reset HEAD hour_seconds.csv
+  397  git status
+  398  git add -u
+  399  git status
+  400  git reset HEAD hour_seconds.csv
+  401  git status
+  402  git add hour_seconds.csv
+  403  git status
+  404  git commit -m "deleting hour_seconds"
+  405  git status
+  406  git push origin assignment
+  407  git status
+  408  clear
+  409  git rm --cached hour_seconds.csv
+  410  git rm hour_seconds.csv
+  411  git reset HEAD hour_seconds.csv
+  412  git status
+  413  git reset HEAD hour_seconds.csv 
+  414  git status
+  415  bfg --delete-files hour_seconds.csv[B
+  416  git filter-branch --force --index-filter   "git rm --cached --ignore-unmatch PATH-TO-YOUR-FILE-WITH-SENSITIVE-DATA"   --prune-empty --tag-name-filter cat -- --all
+  417  pwd
+  418  ls
+  419  git filter-branch --force --index-filter   "git rm --cached --ignore-unmatch /home/jupyter/w205/project-1-frankbruni/hour_seconds.csv"   --prune-empty --tag-name-filter cat -- --all
+  420  git status
+  421  git push origin assignment
+  422  git pull origin assignment
+  423  git status
+  424  ls
+  425  git revert
+  426  git status
+  427  git rm hour_seconds
+  428  git rm hour_seconds.csv
+  429  ls
+  430  git status
+  431  git reset HEAD hour_seconds.csv 
+  432  git statys
+  433  git status
+  434  git rm hour_seconds.csv 
+  435  git reset --hard
+  436  git status
+  437  git reset --hard
+  438  git status
+  439  ls
+  440  git push origin assignment
+  441  git reset --hard
+  442  git reset HEAD~
+  443  git status
+  444  git checkout -- hour_seconds.csv
+  445  git status
+  446  ls
+  447  git statusd
+  448  git status
+  449  git reset HEAD^
+  450  git status
+  451  git reset HEAD^
+  452  git status
+  453  git reset HEAD^
+  454  git status
+  455  git reset HEAD^
+  456  git status
+  457  git add commuter_trips.csv 
+  458  git add days.csv 
+  459  git add hours.csv 
+  460  git add hours_weekend.csv 
+  461  git add stations.csv 
+  462  git add trip_time.csv 
+  463  git status
+  464  git add .ipynb_checkpoints/
+  465  git add Project_1.ipynb 
+  466  git status
+  467  git commit -m "update files"
+  468  git status
+  469  git push origin assignment
+  470  git pull origin assignment
+  471  git status
+  472  git add .ipynb_checkpoints/
+  473  git add Project_1.ipynb 
+  474  git status
+  475  git commit -m "file fix"
+  476  git status
+  477  git push origin assignment
+  478  git status
+  479  git add .ipynb_checkpoints/
+  480  git add Project_1.ipynb 
+  481  git commit -m "file fix"
+  482  git push origin assignment
+  483  git status
+  484  ls
+  485  clear
+  486  ls
+  487  cd w205/
+  488  ls
+  489  cd project-1-frankbruni/
+  490  ls
+  491  git status
+  492  git add .ipynb_checkpoints/
+  493  git add Project_1.ipynb 
+  494  git status
+  495  git commit -m "Final Jupyter Push"
+  496  git status
+  497  git push origin assignment
+  498  git status
+  499  ls
+  500  vi README.md 
+  501  git status
+  502  git add README.md 
+  503  git commit -m "Update README"
+  504  git push origin assignment
+  505  vi README.md 
+  506  git add README.md 
+  507  git commit -m "Update README"
+  508  git push origin assignment
+  509  exit
+  510  clear
+  511  mkdir ~/w205/kafka
+  512  cd ~/w205/kafka
+  513  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/kafka/
+  514  docker-compose up -d
+  515  docker-compose ps
+  516  docker ps -a
+  517  docker-compose logs zookeeper | grep -i binding
+  518  docker-compose logs kafka | grep -i started
+  519  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  520  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  521  docker-compose exec kafka bash -c "seq 42 | kafka-console-producer --request-required-acks 1 --broker-list localhost:29092 --topic foo && echo 'Produced 42 messages.'"
+  522  docker-compose exec kafka kafka-console-consumer --bootstrap-server localhost:29092 --topic foo --from-beginning --max-messages 42
+  523  docker-compose down
+  524  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+  525  ls
+  526  docker-compose up -d
+  527  docker-compose logs -f kafka
+  528  exit
+  529  docker-compose ps
+  530  ls
+  531  cd w205/
+  532  ls
+  533  docker-compose ps
+  534  cd kafka/
+  535  docker-compose ps
+  536  docker ps -a
+  537  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  538  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  539  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json"
+  540  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.'"
+  541  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c"
+  542  docker-compose exec mids bash -c "cat /w205/kafka/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+  543  docker-compose exec kafka kafka-console-consumer --bootstrap-server kafka:29092 --topic foo --from-beginning --max-messages 42
+  544  docker-compose down
+  545  docker ps -a
+  546  docker-compose ps
+  547  cd ..
+  548  ls
+  549  git clone https://github.com/mids-w205-crook/project-2-frankbruni.git
+  550  git status
+  551  cd project-2-frankbruni/
+  552  ls
+  553  git status
+  554  git branch assignment
+  555  git checkout assignment
+  556  git status
+  557  ls
+  558  exit
+  559  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  560  ls
+  561  cd w205/
+  562  ls
+  563  cd spark-with-kafka/
+  564  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  565  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  566  docker-compose exec mids bash -c "cat /w205/github-example-large.json"
+  567  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.'"
+  568  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c"
+  569  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t foo && echo 'Produced 100 messages.'"
+  570  docker-compose exec spark pyspark
+  571  docker-compose down
+  572  docker ps -a
+  573  exit
+  574  ls
+  575  cd w205/
+  576  ls
+  577  cd spark-with-kafka/
+  578  ls
+  579  docker-compose exec kafka kafka-topics --create --topic foo --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  580  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  581  docker-compose exec kafka bash -c "seq 42 | kafka-console-producer --request-required-acks 1 --broker-list kafka:29092 --topic foo && echo 'Produced 42 messages.'"
+  582  docker-compose exec spark pyspark
+  583  docker-compose down
+  584  cd ~/w205
+  585  curl -L -o github-example-large.json https://goo.gl/Y4MD58
+  586  cd ~/w205/spark-with-kafka
+  587  docker-compose up -d
+  588  docker-compose logs -f kafka
+  589  docker pull midsw205/base:latest
+  590  docker pull midsw205/base:0.1.8
+  591  docker pull midsw205/base:0.1.9
+  592  docker pull redis
+  593  docker pull confluentinc/cp-zookeeper:latest
+  594  docker pull confluentinc/cp-kafka:latest
+  595  docker pull midsw205/spark-python:0.0.5
+  596  docker pull midsw205/spark-python:0.0.6
+  597  docker pull midsw205/cdh-minimal:latest
+  598  docker pull midsw205/hadoop:0.0.2
+  599  docker pull midsw205/presto:0.0.1
+  600  mkdir ~/w205/spark-with-kafka
+  601  ls
+  602  cd ~/w205/spark-with-kafka
+  603  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml .
+  604  ls
+  605  docker-compose up -d
+  606  docker-compose logs -f kafka
+  607  exit
+  608  cd ~/w205/spark-with-kafka-and-hdfs
+  609  docker-compose exec cloudera hadoop fs -ls /tmp/
+  610  docker-compose exec kafka kafka-topics --create --topic players --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  611  docker-compose exec mids bash -c "cat /w205/players.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t players"
+  612  docker-compose exec spark pyspark
+  613  docker-compose down
+  614  exit
+  615  cd ~/w205/spark-with-kafka-and-hdfs
+  616  docker-compose exec cloudera hadoop fs -ls /tmp/
+  617  docker-compose exec cloudera hadoop fs -ls /tmp/players/
+  618  docker-compose exec cloudera hadoop fs -ls /tmp/
+  619  docker-compose exec cloudera hadoop fs -ls /tmp/extracted_players/
+  620  docker-compose exec kafka kafka-topics --create --topic commits --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  621  cd ~/w205
+  622  ls
+  623  cd w205
+  624  ls
+  625  cd ~/w205/spark-with-kafka-and-hdfs
+  626  docker-compose exec mids bash -c "cat /w205/github-example-large.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t commits"
+  627  docker-compose exec cloudera hadoop fs -ls /tmp/
+  628  docker-compose exec cloudera hadoop fs -ls /tmp/commits/
+  629  docker-compose exec cloudera hadoop fs -ls /tmp/some_commit_info/
+  630  exit
+  631  mkdir ~/w205/spark-with-kafka-and-hdfs
+  632  cd ~/w205/spark-with-kafka-and-hdfs
+  633  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml .
+  634  cd ~/w205
+  635  curl -L -o players.json https://goo.gl/vsuCpZ
+  636  cd ~/w205/spark-with-kafka-and-hdfs
+  637  ls -h
+  638  docker-compose up -d
+  639  docker-compose logs -f kafka
+  640  docker ps -a
+  641  exit
+  642  ls
+  643  cd w205/
+  644  ls
+  645  cd project-2-frankbruni/
+  646  ls
+  647  jupyter@tensorflow-2-3-20200831-161507:~/w205/project-2-frankbruni$ 
+  648  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp`
+  649  exit
+  650  ls
+  651  curl -L -o assessment-attempts-20180128-121051-nested.json https://goo.gl/ME6hjp
+  652  ls
+  653  cd ..
+  654  ls
+  655  cd spark-with-kafka
+  656  ls
+  657  cd ..
+  658  cd project-2-frankbruni/
+  659  ls
+  660  cd ..
+  661  cd course-content/
+  662  ls
+  663  cd 06
+  664  cd 06-Transforming-Data/
+  665  ls
+  666  cd ..
+  667  ls
+  668  cd project-2-frankbruni/
+  669  ls
+  670  cp ~/w205/course-content/06-Transforming-Data/docker-compose.yml ~/w205/project-2-frankbruni/
+  671  ls
+  672  docker-compose up -d
+  673  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  674  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  675  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json"
+  676  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c"
+  677  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+  678  docker-compose exec kafka kafka-console-consumer --bootstrap-server kafka:29092 --topic assessments --from-beginning --max-messages 42
+  679  clear
+  680  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t assessments -o beginning -e"
+  681  docker-compose down
+  682  ls
+  683  cd ..
+  684  ls
+  685  cd spark-with-kafka
+  686  ls
+  687  cd ..
+  688  ls
+  689  cd project-2
+  690  cd project-2-frankbruni/
+  691  ls
+  692  cp ~/w205/course-content/07-Sourcing-Data/docker-compose.yml .
+  693  ls
+  694  docker-compose up -d
+  695  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  696  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.'"
+  697  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c"
+  698  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments && echo 'Produced 100 messages.'"
+  699  docker-compose exec spark pyspark
+  700  docker-compose down
+  701  ls
+  702  exit
+  703  mkdir ~/w205/flask-with-kafka
+  704  cd ~/w205/flask-with-kafka
+  705  cp ~/w205/course-content/09-Ingesting-Data/docker-compose.yml .
+  706  docker-compose up -d
+  707  docker-compose exec kafka kafka-topics --create --topic events --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  708  cp ~/w205/course-content/09-Ingesting-Data/basic_game_api.py .
+  709  docker-compose exec mids env FLASK_APP=/w205/flask-with-kafka/basic_game_api.py flask run
+  710  docker-compose ps
+  711  docker-compose exec mids env FLASK_APP=/w205/flask-with-kafka/basic_game_api.py flask run
+  712  ls
+  713  cp ~/w205/course-content/09-Ingesting-Data/game_api.py .
+  714  ls
+  715  docker-compose exec mids env FLASK_APP=/w205/flask-with-kafka/game_api.py flask run
+  716  ls
+  717  docker-compse down
+  718  docker-compose down
+  719  exit
+  720  docker-compose exec mids curl http://localhost:5000/
+  721  cd ~/w205/flask-with-kafka
+  722  ls
+  723  docker-compose exec mids curl http://localhost:5000/
+  724  docker-compose exec mids curl http://localhost:5000/purchase_a_sword
+  725  ls
+  726  docker-compose exec mids curl http://localhost:5000/
+  727  docker-compose exec mids curl http://localhost:5000/purchase_a_sword
+  728  docker-compose exec mids bash -c "kafkacat -C -b kafka:29092 -t events -o beginning -e"
+  729  ls
+  730  clear
+  731  ls
+  732  cd ..
+  733  ls
+  734  cd project-2-frankbruni/
+  735  ls
+  736  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  737  docker-compose up -d
+  738  docker-compose exec kafka kafka-topics --describe --topic foo --zookeeper zookeeper:32181
+  739  docker-compose exec kafka kafka-topics --describe --topic assessments --zookeeper zookeeper:32181
+  740  history > frankbruni-history.txt
+  741  ls
+  742  vi frankbruni-history.txt 
+  743  docker ps -a
+  744  docker-compose down
+  745  cp ~/w205/course-content/08-Querying-Data/docker-compose.yml .
+  746  ls
+  747  docker-compose up -d
+  748  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  749  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+  750  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments
+  751  docker ps -a
+  752  ls
+  753  docker-compose down
+  754  docker-compose up -d
+  755  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  756  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments"
+  757  ls
+  758  vi docker-compose.yml 
+  759  docker-compose down
+  760  docker-compose up -d
+  761  docker-compose exec spark bash
+  762  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+  763  docker-compose down
+  764  ls
+  765  exit
+  766  ls
+  767  cd w205/
+  768  cd project-2-frankbruni/
+  769  ls
+  770  docker-compose up -d
+  771  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  772  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments"
+  773  docker-compose exec spark bash
+  774  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+  775  docker ps -a
+  776  docker-compose down
+  777  docker ps -a
+  778  exit
+  779  clear
+  780  ls
+  781  cd w205/
+  782  cd project-2-frankbruni/
+  783  ls
+  784  docker-compose up -d
+  785  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  786  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+  787  ls
+  788  docker-compose down
+  789  docker-compose up -d
+  790  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  791  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+  792  exit
+  793  ls
+  794  cd w205/
+  795  ls
+  796  cd project-2-frankbruni/
+  797  ls
+  798  docker-compose up -d
+  799  docker-compose exec kafka kafka-topics --create --topic assessments --partitions 1 --replication-factor 1 --if-not-exists --zookeeper zookeeper:32181
+  800  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments”
+  801  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments
+  802  docker-compose exec mids bash -c "cat /w205/project-2-frankbruni/assessment-attempts-20180128-121051-nested.json | jq '.[]' -c | kafkacat -P -b kafka:29092 -t assessments"
+  803  docker-compose exec spark bash
+  804  docker-compose exec spark env PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS='notebook --no-browser --port 8888 --ip 0.0.0.0 --allow-root' pyspark
+  805  ls
+  806  docker-compose down
+  807  docker ps -a
+  808  git status
+  809  git add .
+  810  git status
+  811  git reset
+  812  git status
+  813  git add Project-2.ipynb 
+  814  git status
+  815  git branch
+  816  git commit -m "adding jupyter notebook"
+  817  git push origin assignment
+  818  git status
+  819  exit
+  820  clear
+  821  ls
+  822  cd w205
+  823  ls
+  824  cd project-2-frankbruni/
+  825  ls
+  826  history > frankbruni-history.txt
