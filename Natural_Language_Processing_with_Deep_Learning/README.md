@@ -14,7 +14,7 @@ summarization.
 - Overview of NLP
 - ML Models and Neural Networks
 - Classification and Sentiment
-- POS Tagging
+- Part of Speech Tagging
 - Language Modeling
 - Machine Translation
 - Summarization and Information Retrieval
