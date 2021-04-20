@@ -2,6 +2,8 @@
 
 <h2>Group: Daphne Yang, Julie Lai, Frank Bruni, Arda Sozer</h2>
 
+<a href=" https://people.ischool.berkeley.edu/~asozer/ ">Link to Project</a> <a href=" https://spotify-visualizations.vercel.app/ ">(Alternate Link)</a>
+
 ### Description
 
 <hr>
