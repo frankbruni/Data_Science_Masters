@@ -6,7 +6,7 @@
   - [Paper](Natural_Language_Processing_with_Deep_Learning/Final_Project/Inverse_Hierarchical_MutiDocument_Summarization.pdf) and [Notebook](Natural_Language_Processing_with_Deep_Learning/Final_Project/pipeline_models/pipeline.ipynb) focusing on multidocument summarization.
 
 - Data Visualizations
-  - Final Project <a href="https://people.ischool.berkeley.edu/~asozer/">(Website)</a> that presents spotify visuals and insights.
+  - Final Project <a href="https://people.ischool.berkeley.edu/~asozer/">Website</a> that presents spotify visuals and insights.
   - <a href="https://public.tableau.com/profile/frank.bruni#!/?newProfile=&activeTab=0">Tableau Public</a>
   
 - Data Engineering
