@@ -15,7 +15,7 @@
   - [Project 3](Data_Engineering_W205/project-3-frankbruni/Project_3.ipynb): Understanding User Behavior with Kafka, Spark, HDFS, and Apache Bench
  
 - Experiments 
-  - Final Project [Research Paper](Experiments_W241/Final_Project/W241_Research_Paper.pdf)and link to Experiment <a href="https://ashqtan.github.io/testing.github.io/">(Website)</a> focused on testing reward systems in games.
+  - Final Project [Research Paper](Experiments_W241/Final_Project/W241_Research_Paper.pdf) and link to Experiment <a href="https://ashqtan.github.io/testing.github.io/">(Website)</a> focused on testing reward systems in games.
   
 - Machine Learning
   - [Project 1](Machine_Learning_W207/Project_1/frank_bruni_p1.ipynb): Digit Classification with KNN and Naive Bayes
