@@ -3,9 +3,9 @@
 ### Outline
 
 - Data Engineering
-  - [Project 1](Data_Engineering_W205/project-1-frankbruni/)
-  - [Project 2](Data_Engineering_W205/project-2-frankbruni/)
-  - [Project 3](Data_Engineering_W205/project-3-frankbruni/)
+  - [Project 1](Data_Engineering_W205/project-1-frankbruni/Project_1.ipynb): Lyft Bay Wheels Promotion Recommendation using SQL and GCP
+  - [Project 2](Data_Engineering_W205/project-2-frankbruni/Project-2.ipynb): Tracking User Activity with Kafka and Spark
+  - [Project 3](Data_Engineering_W205/project-3-frankbruni/Project_3.ipynb): Understanding User Behavior with Kafka, Spark, HDFS, and Apache Bench
  
 - Data Visualizations
   - Final Project <a href="https://people.ischool.berkeley.edu/~asozer/">(Website)</a> that presents spotify visuals and insights.
