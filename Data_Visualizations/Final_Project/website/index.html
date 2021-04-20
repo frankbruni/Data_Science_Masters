@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href='./main.css' />
+    <script src='jquery-3.6.0.min.js'></script>
+    <title>Visualizations of Music</title>
+    <link rel="shortcut icon" type="png" href="img/favicon_logo.png">
+</head>
+
+<body>
+    <!-- Navbar-->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg fixed-top py-3">
+            <div class="container"><a href="./index.html" class="navbar-brand text-uppercase font-weight-bold">Exploring
+                    Music through Visualizations</a>
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler navbar-toggler-right mt-0" style="background-color: #1d1d1d; padding: 0.25 rem 0.25rem; padding-top: 0.1rem;"><img src="img/hamburger.png" style="height: 1rem; width: 1.5rem;" alt="hamburger menu collapse"></button>
+
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active"><a href="./index.html"
+                                class="nav-link text-uppercase font-weight-bold">Visualizations <span
+                                    class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a href="./about_us.html"
+                                class="nav-link text-uppercase font-weight-bold">About Our Team</a></li>
+                        <!-- <li class="nav-item"><a href="./methodologies.html" class="nav-link text-uppercase font-weight-bold">Databases</a></li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid cover pb-5" style="width: 100%;">
+        <div class="pt-5 text-white">
+            <h1 class='mb-0 mt-5 pt-5 center' style="backdrop-filter: blur(3px) contrast(0.8); font-size: 50px;">
+                Exploring Music Through Visualizations</h1>
+            <h2 class='center pb-5' style="backdrop-filter: blur(3px) contrast(0.8); font-size: 30px;">Let's Explore
+                Different Qualities of Music Over Time</h2>
+            <p class="center p-3">
+                <button class="btn btn-welcome" type="button" data-toggle="collapse" data-target="#welcome_message"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Click Here For a Welcome Message
+                </button>
+            </p>
+            <div class="collapse" id="welcome_message">
+                <div class="container welcome mb-4"
+                    style="width:95%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <div class="text-white">
+                        <header class="py-4 px-4">
+                            <h1 class="display-4">Welcome Music Lovers &#128512; 🎸🤘</h1>
+                            <p class="lead mb-0">In this project, we hope to explore the different qualities of music
+                                thorughout
+                                history.</p>
+                            <br>
+                            <p class="lead mb-0">We hope this will be of use to all you music lovers, or those who have
+                                more
+                                specific intentions of exploring the different aspects of music.</p>
+                            <br>
+                            <p class="lead mb-0">Some tasks that can be carried out after viewing our Visualizations
+                                include
+                                deciding what kind of musical investments record companies may make in the future.
+                                Musicians may
+                                also benefit, as they can also adjust their styles to better suit the current trends in
+                                music.</p>
+                            <br>
+                            <p class="lead mb-0">Some insights that can be gained from the information presented on this
+                                page incude
+                                predicting the nect big trends in music, learning musical preferences in different parts
+                                of the
+                                world, and learning about seasonal shifts in music preferences.</p>
+                            <br>
+                            <p class="lead mb-0">Data has been collected from multiple sources including directly from
+                                Spotify, as
+                                well as Kaggle projects (of which some are authored by Spotify). </p>
+                        </header>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content-->
+
+    <!-- adding in Tour Guide -->
+    <div class="container-fluid m-4 p-4 center"
+        style="width: 95%; border-radius: 25px; box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.5), 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 15px 0 rgba(0, 0, 0, 0.19);">
+        <div>
+            <h1 class="display-4 px-4">
+                Navigating The Site
+            </h1>
+            <div class="card-group">
+                <div class="card" style="background-color: #1d1d1d; border-radius: 25px; border: none;">
+                    <img class="center" src="img/adventurer.png" style="height: auto; width: 100px;"
+                        class="card-img-top" alt="spot the explorer">
+                    <div class="card-body pt-0">
+                        <h2 class="text-white center">Spot</h2>
+                        <p class="pt-2 card-text text-white center">Spot will be your guide through this exploration of
+                            music. In the visualizations below, click on Spot to get more insights on the visuals</p>
+                    </div>
+                </div>
+                <div class="card" style="background-color: #1d1d1d;border-radius: 25px; border: none; ">
+                    <img class="center" src="img/favicon_logo.png" style="height: auto; width: 75px;"
+                        class="card-img-top" alt="Interactive Aid">
+                    <div class="card-body">
+                        <h2 class="text-white center">Vis Info</h2>
+                        <p class="pt-2 card-text text-white center">To help you explore the music through our
+                            visualizations, click on the Vis Info icon to get more information on how to interact with
+                            the visual</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- First Visual -->
+    <div class="container-fluid center">
+        <div class="text-white">
+            <header class="py-5 mt-5">
+                <h1 class="vis-header display-4 center">Top Songs By Month in 2020</h1>
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+                    aria-expanded="false" aria-controls="multiCollapseExample1">
+                    <img src="img/spot_face.png" style='width: auto; height:50px;' alt="spots-face">
+                </a>
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#multiCollapseExample2" role="button"
+                    aria-expanded="false" aria-controls="multiCollapseExample2">
+                    <img src="img/favicon_logo.png" style="width: auto; height: 40px;" alt="vis info icon">
+                </a>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample1">
+                            <div class="card card-body card-text">
+                                <p class="lead"> <strong class="font-weight-bold card-title">Insight</strong></p>
+                                <p>Bar chart race of the total global streams in 2020. The first bar from the top
+                                    indicates
+                                    the song with the most number of global streams in the world. Blinding Lights by the
+                                    Weeknd is a top
+                                    song in June 2020. You are toggle through the months to see when your favorite song
+                                    was in the
+                                    number 1 spot.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample2">
+                            <div class="card card-body card-text">
+                                <p class="lead"><strong class="font-weight-bold card-title">Interactivity </strong></p>
+                                <p>Toggle through the months in
+                                    2020 OR watch the bar chart race by pressing the play button in the upper right hand
+                                    corner. The button to the right of the square is the play button. The square button
+                                    is the pause/stop button and the left button is the play in reverse button.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="lead mb-0 center">In this section we illustrate our exploration of the hypothesis: What are
+                    the
+                    trends in top songs lists worldwide in 2020?</p>
+
+            </header>
+            <div class='tableauPlaceholder' id='viz1618263746548' style='position: relative'><noscript><a href='#'><img
+                            alt='Dashboard 1 '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;sp&#47;spotifybarchartrace&#47;Dashboard1&#47;1_rss.png'
+                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='spotifybarchartrace&#47;Dashboard1' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;sp&#47;spotifybarchartrace&#47;Dashboard1&#47;1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en' />
+                    <param name='filter' value='publish=yes' />
+                </object></div>
+            <script
+                type='text/javascript'>                    var divElement = document.getElementById('viz1618263746548'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '727px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+        </div>
+    </div>
+
+
+    <!-- Visual -->
+
+
+    <div class="container-fluid center">
+        <div class="pt-5 text-white">
+            <header class="mt-5">
+                <h1 class="display-4 vis-header">Musical Features Over Time</h1>
+                <!-- Toggle Buttons -->
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#features1" role="button"
+                    aria-expanded="false" aria-controls="multiCollapseExample1">
+                    <img src="img/spot_face.png" style='width: auto; height:50px;' alt="spots-face">
+                </a>
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#features2" role="button"
+                    aria-expanded="false" aria-controls="multiCollapseExample2">
+                    <img src="img/favicon_logo.png" style="width: auto; height: 40px;" alt="vis info icon">
+                </a>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="features1">
+                            <div class="card card-body card-text">
+                                <p class="lead"> <strong class="font-weight-bold card-title">Insight</strong></p>
+                                <p>On the left, there is a map of top songs by number of streams across the globe and by
+                                    year. On the map, the darker the shade of green, the more overall streams there were
+                                    in a given year in that country. This is not reflective of how often people stream
+                                    music or how often they use spotify but may rather be a reflection of the population
+                                    of individuals who have access to spotify.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="features2">
+                            <div class="card card-body card-text">
+                                <p class="lead"><strong class="font-weight-bold card-title">Interactivity </strong></p>
+                                <p>In the leged on the upper left hand corner, click
+                                    on the name of the musical feature in the top left hand corner to see the definition
+                                    to the right of the legend. After selecting a musical feature of interest, the
+                                    spotify embeds will show an example of a
+                                    song that received high and low scores for this feature according to Spotify.
+                                    Additionally, the area chart on the right hand side shows the average intensity of
+                                    each musical feature in each given year between 1940 through 2020.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="lead mb-0">In this section we illustrate our exploration of the hypothesis: What are the
+                    trends in top songs lists worldwide in 2020?</p>
+
+            </header>
+            <div class='tableauPlaceholder' id='viz1618273272341' style='width:max-content; margin-left: 10%; position: fixed; display: inline-flex;'><noscript><a href='#'><img
+                            alt='feature definiton '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;fe&#47;featuredef&#47;featuredefiniton&#47;1_rss.png'
+                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='featuredef&#47;featuredefiniton' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;fe&#47;featuredef&#47;featuredefiniton&#47;1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en' />
+                    <param name='filter' value='publish=yes' />
+                </object></div>
+            <script
+                type='text/javascript'>                    var divElement = document.getElementById('viz1618273272341'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '90%'; vizElement.style.height = (divElement.offsetWidth * 0.60) + 'px'; vizElement.style.margin = 'auto'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '90%'; vizElement.style.height = (divElement.offsetWidth * 0.60) + 'px'; vizElement.style.margin = 'auto';} else { vizElement.style.width = '90%'; vizElement.style.height = '700px'; vizElement.style.margin = 'auto';} var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+            </br>
+        </div>
+    </div>
+    </div>
+    <!-- Visual -->
+
+    <div class="container-fluid center">
+        <div class=" text-white">
+            <header class="mt-5">
+                <h1 class="display-4 vis-header">Top Songs from 1920 to 2021</h1>
+                <!-- Toggle Buttons -->
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#Topsongs1" role="button"
+                    aria-expanded="false" aria-controls="multiCollapseExample1">
+                    <img src="img/spot_face.png" style='width: auto; height:50px;' alt="spots-face">
+                </a>
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#Topsongs2" role="button"
+                    aria-expanded="false" aria-controls="multiCollapseExample2">
+                    <img src="img/favicon_logo.png" style="width: auto; height: 40px;" alt="vis info icon">
+                </a>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="Topsongs1">
+                            <div class="card card-body card-text">
+                                <p class="lead"> <strong class="font-weight-bold card-title">Insight</strong></p>
+                                <p>On the top of the visual, there is a scrubber (timeline) that you can move the
+                                    pointers to specify a time period between the left and right year specifications. On
+                                    the left hand side of the visual, the bar chart displays the top 50 songs in the
+                                    specified time period. On the right hand side, the radar chart below shows the
+                                    average musical qualities of popular songs between the specified time range.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="Topsongs2">
+                            <div class="card card-body card-text">
+                                <p class="lead"><strong class="font-weight-bold card-title">Interactivity </strong></p>
+                                <p>You can use the scrubber on the top of the visualization to look at songs between the
+                                    two years specified. To see the musical qualities of any song on the top 50 list,
+                                    click on the bar in the bar chart that corresponds to the song that you would like
+                                    to see.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <p class="lead mb-0">In this section we illustrate our explore: How do musical traits of top songs
+                    change throughout history?</p>
+
+            </header>
+            <div class='tableauPlaceholder' id='viz1616887175894'
+                style='width:75%; height:auto; margin:auto; position: relative;'>
+                <noscript><a href='#'><img alt='top song features '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;fe&#47;featuresbyyear&#47;topsongfeatures&#47;1_rss.png'
+                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='featuresbyyear&#47;topsongfeatures' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;fe&#47;featuresbyyear&#47;topsongfeatures&#47;1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en' />
+                    <param name='filter' value='publish=yes' />
+                </object>
+            </div>
+            <script
+                type='text/javascript'>                    var divElement = document.getElementById('viz1616887175894'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '1039px'; vizElement.style.height = '735px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '1039px'; vizElement.style.height = '735px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '1327px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+        </div>
+    </div>
+
+    <!-- Visual -->
+
+    <div class="container-fluid center" style="width: 75%; height: 50%; margin:auto; ">
+        <div class="pt-5 text-white">
+            <header class="mt-5">
+                <h1 class="display-4 vis-header">International Top Charts</h1>
+                <!-- Toggle Buttons -->
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#Map1" role="button" aria-expanded="false"
+                    aria-controls="multiCollapseExample1">
+                    <img src="img/spot_face.png" style='width: auto; height:50px;' alt="spots-face">
+                </a>
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#Map2" role="button" aria-expanded="false"
+                    aria-controls="multiCollapseExample2">
+                    <img src="img/favicon_logo.png" style="width: auto; height: 40px;" alt="vis info icon">
+                </a>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="Map1">
+                            <div class="card card-body card-text">
+                                <p class="lead"> <strong class="font-weight-bold card-title">Insight</strong></p>
+                                <p>On the left, there is a map of top songs by number of streams across the globe and by
+                                    year. On the map, the darker the shade of green, the more overall streams there were
+                                    in a given year in that country. This is not reflective of how often people stream
+                                    music or how often they use spotify but may rather be a reflection of the population
+                                    of individuals who have access to spotify.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="Map2">
+                            <div class="card card-body card-text">
+                                <p class="lead"><strong class="font-weight-bold card-title">Interactivity </strong></p>
+                                <p>Select the year and country
+                                    you would like to see using the radio buttons and clicking on the country on the
+                                    map. The bar chart
+                                    on the right hand side shows the number of streams that year in the respective
+                                    country. You can also
+                                    click on the bar to listen to a highlight from the song!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="lead mb-0">In this section we illustrate our explore: What are the trends in top songs lists
+                    around the globe over the years?</p>
+
+            </header>
+            <div class='tableauPlaceholder' id='viz1617576928940' style='position: relative'><noscript><a href='#'><img
+                            alt='Dashboard 1 '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;sp&#47;spotify_map_v3_16168889844290&#47;Dashboard1&#47;1_rss.png'
+                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='spotify_map_v3_16168889844290&#47;Dashboard1' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;sp&#47;spotify_map_v3_16168889844290&#47;Dashboard1&#47;1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en' />
+                    <param name='filter' value='publish=yes' />
+                </object></div>
+            <script
+                type='text/javascript'>                    var divElement = document.getElementById('viz1617576928940'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.minWidth = '420px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '587px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px'; } else if (divElement.offsetWidth > 500) { vizElement.style.minWidth = '420px'; vizElement.style.maxWidth = '100%'; vizElement.style.minHeight = '587px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '1027px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+        </div>
+    </div>
+
+
+    <!-- Visual -->
+
+    <div class="container-fluid center" style="margin: auto;">
+        <div class="pt-5 text-white">
+            <header class="py-5 mt-5">
+                <h1 class="display-4 vis-header">Top Songs By Genre Between 2017 and 2020</h1>
+                <!-- Toggle Buttons -->
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#genres1" role="button" aria-expanded="false"
+                    aria-controls="multiCollapseExample1">
+                    <img src="img/spot_face.png" style='width: auto; height:50px;' alt="spots-face">
+                </a>
+                <a class="btn guide-icons" data-bs-toggle="collapse" href="#genres2" role="button" aria-expanded="false"
+                    aria-controls="multiCollapseExample2">
+                    <img src="img/favicon_logo.png" style="width: auto; height: 40px;" alt="vis info icon">
+                </a>
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="genres1">
+                            <div class="card card-body card-text">
+                                <p class="lead"> <strong class="font-weight-bold card-title">Insight</strong></p>
+                                <p>On the left is a bar chart of the number of top 200 global songs that fall into each
+                                    corresponding category. Songs categorized as multi-genre songs (by Genius API) were
+                                    not categorized into one genre over another but are represented in both genres. Top
+                                    songs are also sorted by the top number of streams and can be further explored
+                                    through the embedded spotify player.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="genres2">
+                            <div class="card card-body card-text">
+                                <p class="lead"><strong class="font-weight-bold card-title">Interactivity </strong></p>
+                                <p>Click on the bar chart to see the
+                                    top 10 most streamed songs (between 2017 - 2020) in any of the selected five
+                                    categories. Hover over any
+                                    of the bars to see a word cloud of the top lyric words used. Click on any of bar
+                                    in Top Streaming
+                                    Songs to play a highlight.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="lead mb-0">In this section we illustrate our exploration of the hypothesis: What are the
+                    trends in top songs lists worldwide in 2020?</p>
+
+            </header>
+            <div class='tableauPlaceholder' id='viz1617658483596'
+                style='width: 75%; height: auto; position: relative; margin: auto;'>
+                <noscript><a href='#'><img alt='Spotify Top Hits By Genre '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;SpotifyVisualizationsTopSongs&#47;SpotifyTopHitsByGenre&#47;1_rss.png'
+                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='SpotifyVisualizationsTopSongs&#47;SpotifyTopHitsByGenre' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;SpotifyVisualizationsTopSongs&#47;SpotifyTopHitsByGenre&#47;1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en' />
+                </object>
+            </div>
+            <script
+                type='text/javascript'>                    var divElement = document.getElementById('viz1617658483596'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '1000px'; vizElement.style.height = '827px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '1000px'; vizElement.style.height = '827px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '1127px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);</script>
+            </br>
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script src="./main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

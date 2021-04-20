@@ -9,10 +9,12 @@ We will cover a wide range of concepts with a focus on practical applications
 such as information extraction, machine translation, sentiment analysis, and
 summarization.
 
-## Links:
+# Topics Covered
 
-* [Piazza](https://piazza.com/berkeley/spring2021/datasciw266)
-* [Syllabus](syllabus/)
-* [Assignments](assignment/)
-* [Project](project/)
-* [Notebooks & Materials](materials/)
+- Overview of NLP
+- ML Models and Neural Networks
+- Classification and Sentiment
+- POS Tagging
+- Language Modeling
+- Machine Translation
+- Summarization and Information Retrieval
