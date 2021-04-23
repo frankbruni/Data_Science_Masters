@@ -2,13 +2,13 @@
 
 ### Outline
 
-- Natural Language Processing 
-  - [Paper](Natural_Language_Processing_with_Deep_Learning/Final_Project/Inverse_Hierarchical_MutiDocument_Summarization.pdf) and [Notebook](Natural_Language_Processing_with_Deep_Learning/Final_Project/pipeline_models/pipeline.ipynb) focusing on multidocument summarization.
-
 - Data Visualizations
   - Final Project <a href="https://people.ischool.berkeley.edu/~asozer/">Website</a> that presents spotify visuals and insights.
   - <a href="https://public.tableau.com/profile/frank.bruni#!/?newProfile=&activeTab=0">Tableau Public</a>
   
+- Natural Language Processing 
+  - [Paper](Natural_Language_Processing_with_Deep_Learning/Final_Project/Inverse_Hierarchical_MutiDocument_Summarization.pdf) and [Notebook](Natural_Language_Processing_with_Deep_Learning/Final_Project/pipeline_models/pipeline.ipynb) focusing on multidocument summarization.
+
 - Data Engineering
   - [Project 1](Data_Engineering_W205/project-1-frankbruni/Project_1.ipynb): Lyft Bay Wheels Promotion Recommendation using SQL and GCP
   - [Project 2](Data_Engineering_W205/project-2-frankbruni/Project-2.ipynb): Tracking User Activity with Kafka and Spark
